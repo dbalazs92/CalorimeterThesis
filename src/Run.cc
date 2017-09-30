@@ -1,0 +1,50 @@
+/**
+ * @file /DB_EMCal/src/Run.cc
+ * @author Balázs Demeter <balazsdemeter92@gmail.com>
+ * @date 2017/09/15 <creation>
+ * 
+ * @section DESCRIPTION
+ * 
+ * The Geant4 simulation of EMcal's run source code for threads.
+ * Latest updates of project can be found in README file.
+ **/
+
+
+#include "Run.hh"
+
+/// @brief Constructor of Run
+
+Run::Run()
+: G4Run()
+{
+	histo = new HistoManager();
+	histo->Book();
+} 
+
+/// @brief Destructor of Run
+
+Run::~Run()
+{} 
+ 
+/// @brief Void Merge
+
+void Run::Merge(const G4Run* run)
+{
+  const Run* localRun = static_cast<const Run*>(run);
+
+  G4Run::Merge(run); 
+}
+
+void Run::Fill(G4int id, G4double x, G4double y, G4double z, G4double value)
+{
+	histo->FillHisto(id, x, y, z, value);
+}
+
+void Run::Save()
+{
+	histo->Save();
+}	
+
+/// End of file
+
+
