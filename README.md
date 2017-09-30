@@ -34,29 +34,29 @@ The first two parameters are numbers while others are strings for the program. E
 
 Via Git:
 
-'''
+```
 git clone https://github.com/dbalazs92/CalorimeterThesis.git
-'''
+```
 
 Direct link:
 
-'''
+```
 https://github.com/dbalazs92/CalorimeterThesis/archive/master.zip
-'''
+```
 
 ### Build
 
 In the directory of program (DB_EMCal), open a terminal window and enter:
 
-'''
+```
 chmod 744 setup.sh
-'''
+```
 
 After giving the necessary permissions for setup script, run:
 
-'''
+```
 ./setup.sh
-''' 
+``` 
 
 ### Running the simulation
  
@@ -64,17 +64,17 @@ After giving the necessary permissions for setup script, run:
 
 After build, in the directory of build (emcal_build), open a terminal window and enter:
 
-'''
+```
 ./DB_EMCal <numberofevents> <energyofparticleingev> <physicslist> <typeofparticle>
-'''
+```
 
 #### Run in interactive mode
 
 After build, in the directory of program (DB_EMCal), open a terminal window and enter:
 
-'''
+```
 ./interactive.sh
-'''
+```
 
 ## Updates
 
