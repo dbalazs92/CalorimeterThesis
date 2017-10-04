@@ -66,13 +66,18 @@ void SteppingAction::UserSteppingAction(const G4Step* fStep)
   {
   procN=fTrack->GetCreatorProcess()->GetProcessName();
   
-  fEventAction->AddData(1, postX,postY,postZ,edepStep);
+  fEventAction->fHistoManager->FillHisto(1,postX,postY,postZ,edepStep);
+  
   
   if(((postName=="fiberInterior")||(postName=="fiberCover"))&&((preName=="fiberInterior")||(preName=="fiberCover")))
   {
-	  fEventAction->AddData(2, postX,postY,postZ,postkinE);
+	  fEventAction->fHistoManager->FillHisto(2,postX,postY,postZ,postkinE);
   }
- 
+  if(preName=="Detector")
+  {
+	  fTrack->SetTrackStatus(fStopAndKill);  
+  }
+   
   }
 }
 

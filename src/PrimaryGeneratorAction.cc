@@ -30,14 +30,11 @@
 
 PrimaryGeneratorAction::PrimaryGeneratorAction(G4double E0, G4String Particle)
 : G4VUserPrimaryGeneratorAction(),
-  fParticleGun(0)
+  fParticleGun(0),fParticle(Particle),fEnergy(E0)
 {
   G4int n_particle = 1;   ///particles per event
   rad = 0.3*mm;     ///radius
   fParticleGun  = new G4ParticleGun(n_particle);
-  
-  fParticle = Particle;
-  fEnergy = E0;
 
   G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable(); /// default particle kinematic
   G4ParticleDefinition* particle = particleTable->FindParticle(fParticle);

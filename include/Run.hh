@@ -14,7 +14,6 @@
 
 #include "G4Run.hh"
 #include "globals.hh"
-#include "HistoManager.hh"
 
 class Run : public G4Run
 {
@@ -23,11 +22,7 @@ public:
   virtual ~Run();
   
   virtual void Merge(const G4Run*);
-  void Fill(G4int id, G4double x, G4double y, G4double z, G4double value);
-  void Save();
   
-private:
-  HistoManager*  histo;
 };
 
 #endif

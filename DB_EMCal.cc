@@ -36,6 +36,8 @@
  * @param	Energy 		Command line argument for Kinetic energy of particle
  * @param	PhysList 	Command line argument for Hadronic physics list
  * @param	Particle	Command line argument for type of Particle
+ * @param   CutEx       Command line argument for cut of deexcitation
+ * @param   RootFile    Command line argument for name of ROOT file for results
  * 
  **/
 
@@ -44,19 +46,23 @@ int main(int argc,char** argv)
   
   /// parameter from command line
   unsigned int NoE=0;
+  unsigned int CutEx=0;
   G4double Energy=0.0;
   G4String PhysList="QGSP_BERT";
   G4String Particle="gamma";
+  G4String RootFile="Default.root";
   
-  if (argc==5)
+  if (argc==7)
   {  
     NoE=atoi(argv[1]);
     Energy=atof(argv[2]);
     PhysList=argv[3];
     Particle=argv[4];
-    
+    CutEx=atoi(argv[5]);
+    RootFile=argv[6];
   }
-  
+  HistoManager* histo = new HistoManager();
+  histo->Book(RootFile);
   
 #ifdef G4MULTITHREADED
   G4MTRunManager* runManager = new G4MTRunManager;
@@ -68,14 +74,14 @@ int main(int argc,char** argv)
 #endif
   
   runManager->SetUserInitialization(new DetectorConstruction());
-  runManager->SetUserInitialization(new PhysicsList(PhysList));
-  runManager->SetUserInitialization(new ActionInitialization(Energy, Particle));
+  runManager->SetUserInitialization(new PhysicsList(PhysList,CutEx));
+  runManager->SetUserInitialization(new ActionInitialization(Energy, Particle, histo));
 
   G4VisManager* visManager = new G4VisExecutive;
   visManager->Initialize();
   G4UImanager* UImanager = G4UImanager::GetUIpointer();
 
-  if (argc==5)
+  if (argc==7)
   {   
     /// batch
    runManager->Initialize();

@@ -13,9 +13,10 @@
 
 /// @brief Constructor of Run
 
-RunAction::RunAction()
-: G4UserRunAction()
-{ }
+RunAction::RunAction(HistoManager* histo)
+: G4UserRunAction(), fHisto(histo)
+{   
+}
 
 /// @brief Destructor of Run
 
@@ -52,7 +53,7 @@ void RunAction::EndOfRunAction(const G4Run*)
      << "--------------------End of Local Run------------------------";
   }
   
-  run->Save();
+  fHisto->Save();
 }
 
 /// End of file

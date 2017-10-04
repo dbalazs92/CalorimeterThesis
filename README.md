@@ -28,8 +28,6 @@ The first two parameters are numbers while others are strings for the program. E
 
 * CLHEP 2.3.4.4 or newer
 
-* CERN ROOT v6.08/06 or newer
-
 ### Download Link
 
 Via Git:
@@ -65,7 +63,7 @@ After giving the necessary permissions for setup script, run:
 After build, in the directory of build (emcal_build), open a terminal window and enter:
 
 ```
-./DB_EMCal <numberofevents> <energyofparticleingev> <physicslist> <typeofparticle>
+./DB_EMCal <numberofevents> <energyofparticleingev> <physicslist> <typeofparticle> <typeofcut> <nameofdatafile>
 ```
 
 #### Run in interactive mode
@@ -77,6 +75,8 @@ After build, in the directory of program (DB_EMCal), open a terminal window and 
 ```
 
 ## Updates
+
+* 2017/10/04 - 'v1.1' - Improved HistoManager for >1 threads and bug fixes
 
 * 2017/09/30 - 'v1.0' - One fiber with tungsten cover and detector plate
 

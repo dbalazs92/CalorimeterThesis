@@ -17,8 +17,6 @@
 Run::Run()
 : G4Run()
 {
-	histo = new HistoManager();
-	histo->Book();
 } 
 
 /// @brief Destructor of Run
@@ -34,16 +32,6 @@ void Run::Merge(const G4Run* run)
 
   G4Run::Merge(run); 
 }
-
-void Run::Fill(G4int id, G4double x, G4double y, G4double z, G4double value)
-{
-	histo->FillHisto(id, x, y, z, value);
-}
-
-void Run::Save()
-{
-	histo->Save();
-}	
 
 /// End of file
 

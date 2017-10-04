@@ -13,8 +13,8 @@
 
 /// @brief Constructor of Event action
 
-EventAction::EventAction()
-: G4UserEventAction()
+EventAction::EventAction(HistoManager* histo)
+: G4UserEventAction(), fHistoManager(histo)
 {} 
 
 /// @brief Destructor of Event action
@@ -43,13 +43,6 @@ void EventAction::BeginOfEventAction(const G4Event*)
 void EventAction::EndOfEventAction(const G4Event*)
 {   
   Run* run = static_cast<Run*>(G4RunManager::GetRunManager()->GetNonConstCurrentRun()); /// accumulate statistics in DERun
-}
-
-void EventAction::AddData(G4int id, G4double x, G4double y, G4double z, G4double value)
-{
-	Run* run = static_cast<Run*>(G4RunManager::GetRunManager()->GetNonConstCurrentRun());
-	run->Fill(id, x, y, z, value);
-	
 }
 
 

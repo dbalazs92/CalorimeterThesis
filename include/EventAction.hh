@@ -15,6 +15,7 @@
 #include "G4UserEventAction.hh"
 #include "globals.hh"
 #include "Run.hh"
+#include "HistoManager.hh"
 
 #include "G4Event.hh"
 #include "G4RunManager.hh"
@@ -22,13 +23,13 @@
 class EventAction : public G4UserEventAction
 {
   public:
-    EventAction();
+    EventAction(HistoManager*);
     virtual ~EventAction();
     
     virtual void BeginOfEventAction(const G4Event* event);
     virtual void EndOfEventAction(const G4Event* event);
 	
-	void AddData(G4int id, G4double x, G4double y, G4double z, G4double value);
+	HistoManager* fHistoManager;
     
 };
 

@@ -62,7 +62,7 @@ class G4OpBoundaryProcess;
 class PhysicsList: public G4VModularPhysicsList
 {
 public:
-  PhysicsList(G4String PhysList);
+  PhysicsList(G4String PhysList, G4int fCut);
   virtual ~PhysicsList();
 
   virtual void ConstructParticle();
@@ -89,7 +89,6 @@ private:
   static G4ThreadLocal G4OpBoundaryProcess* fBoundaryProcess;
     
   int scut;
-  int pl;
       
   void SetBuilderList0(G4bool flagHP = false);
   void SetBuilderList1(G4bool flagHP = false);

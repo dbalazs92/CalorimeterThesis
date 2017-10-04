@@ -16,6 +16,7 @@
 #include "globals.hh"
 #include "PrimaryGeneratorAction.hh"
 #include "DetectorConstruction.hh"
+#include "HistoManager.hh"
 #include "Run.hh"
 
 #include "G4RunManager.hh"
@@ -27,12 +28,14 @@
 class RunAction : public G4UserRunAction
 {
   public:
-    RunAction();
+    RunAction(HistoManager*);
     virtual ~RunAction();
 
     virtual G4Run* GenerateRun();
     virtual void BeginOfRunAction(const G4Run*);
     virtual void EndOfRunAction(const G4Run*);
+  private:
+	HistoManager* fHisto;
 };
 
 #endif

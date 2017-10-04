@@ -68,11 +68,13 @@ G4ThreadLocal G4OpBoundaryProcess* PhysicsList::fBoundaryProcess = 0;
  * 
  **/
 
-PhysicsList::PhysicsList(G4String inPhysList) 
+PhysicsList::PhysicsList(G4String inPhysList, G4int fCut)
  : G4VModularPhysicsList(),fEmPhysicsList(0),fDecay(0)
 {
   fCutForParticle=1000;
-  
+
+  scut=fCut;
+
   G4LossTableManager::Instance();
   defaultCutValue = fCutForParticle*micrometer;
   fCutForGamma     = defaultCutValue;
@@ -81,38 +83,9 @@ PhysicsList::PhysicsList(G4String inPhysList)
   fCutForProton    = defaultCutValue;
   fCutForElectron  = defaultCutValue;
   SetVerboseLevel(1);
-  
-  pl=1;
-  scut=0;
-  
-  
-  if (pl==0) /// EM physics
-  {
-  
-    fEmPhysicsList = new G4EmStandardPhysics();
 
-  } else if (pl==1) {
 
-    fEmPhysicsList = new G4EmStandardPhysics_option1();
-
-  } else if (pl==2) {
-
-    fEmPhysicsList = new G4EmStandardPhysics_option2();
-
-  } else if (pl==3) {
-
-    fEmPhysicsList = new G4EmStandardPhysics_option3();
-
-  } else if (pl==4) {
-
-    fEmPhysicsList = new G4EmStandardPhysics_option4();
-
-  } else if (pl==5) {
-
-    fEmPhysicsList = new G4EmStandardPhysicsGS();
-
-  }
-  
+  AddPhysicsList("emstandard_opt0");
   AddPhysicsList(inPhysList);
   fDecay = new G4DecayPhysics();
   

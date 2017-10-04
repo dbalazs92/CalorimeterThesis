@@ -13,23 +13,12 @@
 #define HistoManager_h 1
 
 
-#include <TF1.h>
-#include <TH1.h>
-#include <TH2.h>
-#include <TH3.h>
-#include <TNtuple.h>
-#include <TFile.h>
-#include <TRandom.h>
-#include <TMath.h>
-#include <TCanvas.h>
+#include "g4root.hh"
 
 #include "globals.hh"
 #include "G4UnitsTable.hh"
+#include "G4SystemOfUnits.hh"
 
-class TFile;
-class TTree;
-class TH1D;
-class TH2D;
 
 const G4int fMaxHisto = 4;
 
@@ -40,16 +29,11 @@ class HistoManager
     HistoManager();
    ~HistoManager();
    
-    void Book();
+    void Book(G4String fileName);
     void Save();
 
     void FillHisto(G4int id, G4double x, G4double y, G4double z, G4double value);
-        
-  private:
-    G4String fileName;
-    TFile*   fRootFile;
-    TH1D*    hist1;
-    TH2D*	 hist2;   
+         
 };
 
 /// End of file

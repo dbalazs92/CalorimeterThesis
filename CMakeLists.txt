@@ -1,4 +1,4 @@
-# $Id: CMakeLists.txt 86065 2017-09-14 18:07:00Z demeter_balazs $
+# $Id: CMakeLists.txt 86065 2014-11-07 08:51:15Z gcosmo $
 
 #----------------------------------------------------------------------------
 # Setup the project
@@ -22,18 +22,12 @@ endif()
 # Setup include directory for this project
 #
 include(${Geant4_USE_FILE})
+include_directories(${PROJECT_SOURCE_DIR}/include)
 
-#----------------------------------------------------------------------------
-# Find ROOT (required package)
-#
-find_package(ROOT REQUIRED)
-
-include_directories(${PROJECT_SOURCE_DIR}/include
-                    ${ROOT_INCLUDE_DIR})
 
 #----------------------------------------------------------------------------
 # Locate sources and headers for this project
-# NB: headers are included so they will show up in
+# NB: headers are included so they will show up in IDEs
 #
 file(GLOB sources ${PROJECT_SOURCE_DIR}/src/*.cc)
 file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.hh)
@@ -42,21 +36,21 @@ file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.hh)
 # Add the executable, and link it to the Geant4 libraries
 #
 add_executable(DB_EMCal DB_EMCal.cc ${sources} ${headers})
-target_link_libraries(DB_EMCal ${Geant4_LIBRARIES} ${ROOT_LIBRARIES})
+target_link_libraries(DB_EMCal ${Geant4_LIBRARIES})
 
 #----------------------------------------------------------------------------
 # Copy all scripts to the build directory, i.e. the directory in which we
-# build DEPL. This is so that we can run the executable directly because it
+# build DB_EMCal. This is so that we can run the executable directly because it
 # relies on these scripts being in the current working directory.
 #
-set(EXAMPLE_SCRIPTS
+set(EXAMPLEDB_EMCal_SCRIPTS
   icons.mac
   run.png
   gui.mac
   vis.mac
   )
 
-foreach(_script ${EXAMPLE_SCRIPTS})
+foreach(_script ${EXAMPLEDB_EMCal_SCRIPTS})
   configure_file(
     ${PROJECT_SOURCE_DIR}/${_script}
     ${PROJECT_BINARY_DIR}/${_script}
@@ -68,7 +62,7 @@ endforeach()
 # For internal Geant4 use - but has no effect if you build this
 # example standalone
 #
-add_custom_target(GDB_EMCal DEPENDS DB_EMCal)
+add_custom_target(GDE DEPENDS DB_EMCal)
 
 #----------------------------------------------------------------------------
 # Install the executable to 'bin' directory under CMAKE_INSTALL_PREFIX

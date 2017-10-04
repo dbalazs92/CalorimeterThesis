@@ -19,11 +19,9 @@
  * 
  **/
 
-ActionInitialization::ActionInitialization(G4double e0, G4String Particle)
- : G4VUserActionInitialization()
+ActionInitialization::ActionInitialization(G4double e0, G4String Particle, HistoManager* histo)
+ : G4VUserActionInitialization(), fParticle(Particle), fEnergy(e0), fHisto(histo)
 {
-	fParticle=Particle;
-	fEnergy=e0;
 }
 
 /// @brief Destructor of Action initialization
@@ -36,7 +34,7 @@ ActionInitialization::~ActionInitialization()
 void ActionInitialization::BuildForMaster() const
 {
   
-  SetUserAction(new RunAction);
+  SetUserAction(new RunAction(fHisto));
 }
 
 /// @brief Build void 
@@ -45,9 +43,9 @@ void ActionInitialization::Build() const
 {
   
   SetUserAction(new PrimaryGeneratorAction(fEnergy,fParticle));
-  SetUserAction(new RunAction);
+  SetUserAction(new RunAction(fHisto));
   
-  EventAction* eventAction = new EventAction;
+  EventAction* eventAction = new EventAction(fHisto);
   SetUserAction(eventAction);
   
   SetUserAction(new SteppingAction(eventAction));
