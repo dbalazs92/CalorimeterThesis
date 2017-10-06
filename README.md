@@ -76,6 +76,8 @@ After build, in the directory of program (DB_EMCal), open a terminal window and 
 
 ## Updates
 
+* 2017/10/06 - 'v1.2b' - Beta for run in multi threads
+
 * 2017/10/04 - 'v1.1' - Improved HistoManager for >1 threads and bug fixes
 
 * 2017/09/30 - 'v1.0' - One fiber with tungsten cover and detector plate

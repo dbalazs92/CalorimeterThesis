@@ -69,7 +69,7 @@ void SteppingAction::UserSteppingAction(const G4Step* fStep)
   fEventAction->fHistoManager->FillHisto(1,postX,postY,postZ,edepStep);
   
   
-  if(((postName=="fiberInterior")||(postName=="fiberCover"))&&((preName=="fiberInterior")||(preName=="fiberCover")))
+  if(((postName=="Detector"))&&((preName=="fiberInterior")||(preName=="fiberCover")))
   {
 	  fEventAction->fHistoManager->FillHisto(2,postX,postY,postZ,postkinE);
   }

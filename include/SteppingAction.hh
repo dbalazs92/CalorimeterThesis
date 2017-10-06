@@ -23,6 +23,7 @@
 #include "G4SystemOfUnits.hh"
 
 #include "Run.hh"
+#include <cmath>
 
 class SteppingAction : public G4UserSteppingAction
 {
