@@ -1,5 +1,5 @@
 /**
- * @file /DB_EMCal/include/Run.hh
+ * @file /EMCal_MT/include/Run.hh
  * @author Balázs Demeter <balazsdemeter92@gmail.com>
  * @date 2017/09/15 <creation>
  * 

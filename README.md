@@ -14,7 +14,7 @@ The calorimeter will be divided into individual towers with about ~2500 fibers.
 A calorimeter 18 radiation lengths thick occupies 12.6 cm in radius, and with light collection, sensors, preamps, and cables, the calorimeter is expected to occupy radial space of about 25 cm. 
 The fibers are single-cladded Kuraray SCSF-78 with 0.47 mm diameter fibers on 1 mm centers. 
 For starting program in batch mode (no UI), 4 parameters are needed: Number of events, energy of bullet particle (in GeV), Hadronic physics list and type of particles. 
-The first two parameters are numbers while others are strings for the program. Every run collects data in histograms (with assistance of Cern ROOT) and results can be shown with running plotHisto.C ROOT macro. 
+The first two parameters are numbers while others are strings for the program. Results can be shown with running plotGraph.cc ROOT macro. 
 
 ## Download and build
 
@@ -44,7 +44,7 @@ https://github.com/dbalazs92/CalorimeterThesis/archive/master.zip
 
 ### Build
 
-In the directory of program (DB_EMCal), open a terminal window and enter:
+In the directory of program (CalorimeterThesis), open a terminal window and enter:
 
 ```
 chmod 744 setup.sh
@@ -63,12 +63,12 @@ After giving the necessary permissions for setup script, run:
 After build, in the directory of build (emcal_build), open a terminal window and enter:
 
 ```
-./DB_EMCal <numberofevents> <energyofparticleingev> <physicslist> <typeofparticle> <typeofcut> <nameofdatafile>
+./EMCal_MT <numberofevents> <energyofparticleingev> <physicslist> <typeofparticle> <typeofcut>
 ```
 
 #### Run in interactive mode
 
-After build, in the directory of program (DB_EMCal), open a terminal window and enter:
+After build, in the directory of program (EMCal_MT), open a terminal window and enter:
 
 ```
 ./interactive.sh
@@ -76,15 +76,13 @@ After build, in the directory of program (DB_EMCal), open a terminal window and 
 
 ## Updates
 
-* 2017/10/06 - 'v1.2b' - Beta for run in multi threads
+* 2017/10/14 - 'v1.1.1b' - Minimal configurations
 
-* 2017/10/04 - 'v1.1' - Improved HistoManager for >1 threads and bug fixes
+* 2017/10/06 - 'v1.1b' - Beta for run in multi threads
 
 * 2017/09/30 - 'v1.0' - One fiber with tungsten cover and detector plate
 
 * 2017/09/29 - 'v0.6' - Added summary and parameterisation
-
-* 2017/09/22 - 'v0.5' - HistoManager, PrimaryGeneratorAction and SteppingAction fixes
 
 * 2017/09/21 - 'v0.4' - Added detector to end of fiber and improved PhysicsList (added hadronic progresses)
 

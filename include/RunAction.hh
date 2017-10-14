@@ -1,5 +1,5 @@
 /**
- * @file /DB_EMCal/include/RunAction.hh
+ * @file /EMCal_MT/include/RunAction.hh
  * @author Balázs Demeter <balazsdemeter92@gmail.com>
  * @date 2017/09/15 <creation>
  * 
@@ -16,7 +16,6 @@
 #include "globals.hh"
 #include "PrimaryGeneratorAction.hh"
 #include "DetectorConstruction.hh"
-#include "HistoManager.hh"
 #include "Run.hh"
 
 #include "G4RunManager.hh"
@@ -28,14 +27,12 @@
 class RunAction : public G4UserRunAction
 {
   public:
-    RunAction(HistoManager*);
+    RunAction();
     virtual ~RunAction();
 
     virtual G4Run* GenerateRun();
     virtual void BeginOfRunAction(const G4Run*);
     virtual void EndOfRunAction(const G4Run*);
-  private:
-	HistoManager* fHisto;
 };
 
 #endif

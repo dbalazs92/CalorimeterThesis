@@ -1,5 +1,5 @@
 /**
- * @file /DB_EMCal/src/PhysicsList.cc
+ * @file /EMCal_MT/src/PhysicsList.cc
  * @author Balázs Demeter <balazsdemeter92@gmail.com>
  * @date 2017/09/15 <creation>
  * 

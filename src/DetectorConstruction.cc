@@ -1,5 +1,5 @@
 /**
- * @file /DB_EMCal/src/DetectorConstruction.cc
+ * @file /EMCal_MT/src/DetectorConstruction.cc
  * @author Balázs Demeter <balazsdemeter92@gmail.com>
  * @date 2017/09/15 <creation>
  * 

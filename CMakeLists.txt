@@ -3,7 +3,7 @@
 #----------------------------------------------------------------------------
 # Setup the project
 cmake_minimum_required(VERSION 2.6 FATAL_ERROR)
-project(DB_EMCal)
+project(EMCal_MT)
 
 #----------------------------------------------------------------------------
 # Find Geant4 package, activating all available UI and Vis drivers by default
@@ -35,22 +35,23 @@ file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.hh)
 #----------------------------------------------------------------------------
 # Add the executable, and link it to the Geant4 libraries
 #
-add_executable(DB_EMCal DB_EMCal.cc ${sources} ${headers})
-target_link_libraries(DB_EMCal ${Geant4_LIBRARIES})
+add_executable(EMCal_MT EMCal_MT.cc ${sources} ${headers})
+target_link_libraries(EMCal_MT ${Geant4_LIBRARIES})
 
 #----------------------------------------------------------------------------
 # Copy all scripts to the build directory, i.e. the directory in which we
-# build DB_EMCal. This is so that we can run the executable directly because it
+# build EMCal_MT. This is so that we can run the executable directly because it
 # relies on these scripts being in the current working directory.
 #
-set(EXAMPLEDB_EMCal_SCRIPTS
+set(EXAMPLEEMCal_MT_SCRIPTS
   icons.mac
   run.png
   gui.mac
   vis.mac
+  plotGraph.cc
   )
 
-foreach(_script ${EXAMPLEDB_EMCal_SCRIPTS})
+foreach(_script ${EXAMPLEEMCal_MT_SCRIPTS})
   configure_file(
     ${PROJECT_SOURCE_DIR}/${_script}
     ${PROJECT_BINARY_DIR}/${_script}
@@ -62,11 +63,11 @@ endforeach()
 # For internal Geant4 use - but has no effect if you build this
 # example standalone
 #
-add_custom_target(GDE DEPENDS DB_EMCal)
+add_custom_target(GDE DEPENDS EMCal_MT)
 
 #----------------------------------------------------------------------------
 # Install the executable to 'bin' directory under CMAKE_INSTALL_PREFIX
 #
-install(TARGETS DB_EMCal DESTINATION bin)
+install(TARGETS EMCal_MT DESTINATION bin)
 
 

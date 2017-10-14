@@ -1,5 +1,5 @@
 /**
- * @file /DB_EMCal/src/SteppingAction.cc
+ * @file /EMCal_MT/src/SteppingAction.cc
  * @author Balázs Demeter <balazsdemeter92@gmail.com>
  * @date 2017/09/15 <creation>
  * 
@@ -66,12 +66,11 @@ void SteppingAction::UserSteppingAction(const G4Step* fStep)
   {
   procN=fTrack->GetCreatorProcess()->GetProcessName();
   
-  fEventAction->fHistoManager->FillHisto(1,postX,postY,postZ,edepStep);
-  
+  G4cout<<"EMCal_MT edepStep "<<postX/cm<<" "<<postY/cm<<" "<<postZ/cm<<" "<<edepStep/eV<<G4endl;
   
   if(((postName=="Detector"))&&((preName=="fiberInterior")||(preName=="fiberCover")))
   {
-	  fEventAction->fHistoManager->FillHisto(2,postX,postY,postZ,postkinE);
+	  G4cout<<"EMCal_MT inDet "<<postX/cm<<" "<<postY/cm<<" "<<postZ/cm<<" "<<postkinE/eV<<G4endl;
   }
   if(preName=="Detector")
   {

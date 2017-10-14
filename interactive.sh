@@ -6,4 +6,4 @@
 # Script for run Geant4 simulation of EMcal in interactive mode
 
 cd emcal_build
-./DB_EMCal
+./EMCal_MT

@@ -1,5 +1,5 @@
 /**
- * @file /DB_EMCal/src/ActionInitialization.cc
+ * @file /EMCal_MT/src/ActionInitialization.cc
  * @author Balázs Demeter <balazsdemeter92@gmail.com>
  * @date 2017/09/15 <creation>
  * 
@@ -19,8 +19,8 @@
  * 
  **/
 
-ActionInitialization::ActionInitialization(G4double e0, G4String Particle, HistoManager* histo)
- : G4VUserActionInitialization(), fParticle(Particle), fEnergy(e0), fHisto(histo)
+ActionInitialization::ActionInitialization(G4double e0, G4String Particle)
+ : G4VUserActionInitialization(), fParticle(Particle), fEnergy(e0)
 {
 }
 
@@ -34,7 +34,7 @@ ActionInitialization::~ActionInitialization()
 void ActionInitialization::BuildForMaster() const
 {
   
-  SetUserAction(new RunAction(fHisto));
+  SetUserAction(new RunAction());
 }
 
 /// @brief Build void 
@@ -43,9 +43,9 @@ void ActionInitialization::Build() const
 {
   
   SetUserAction(new PrimaryGeneratorAction(fEnergy,fParticle));
-  SetUserAction(new RunAction(fHisto));
+  SetUserAction(new RunAction());
   
-  EventAction* eventAction = new EventAction(fHisto);
+  EventAction* eventAction = new EventAction();
   SetUserAction(eventAction);
   
   SetUserAction(new SteppingAction(eventAction));

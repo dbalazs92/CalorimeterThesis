@@ -1,5 +1,5 @@
 /**
- * @file /DB_EMCal/include/ActionInitialization.hh
+ * @file /EMCal_MT/include/ActionInitialization.hh
  * @author Balázs Demeter <balazsdemeter92@gmail.com>
  * @date 2017/09/15 <creation>
  * 
@@ -17,12 +17,11 @@
 #include "RunAction.hh"
 #include "EventAction.hh"
 #include "SteppingAction.hh"
-#include "HistoManager.hh"
 
 class ActionInitialization : public G4VUserActionInitialization
 {
   public:
-    ActionInitialization(G4double e0, G4String Particle, HistoManager*);
+    ActionInitialization(G4double e0, G4String Particle);
     virtual ~ActionInitialization();
 
     virtual void BuildForMaster() const;
@@ -31,7 +30,6 @@ class ActionInitialization : public G4VUserActionInitialization
   private:
 	G4double fEnergy;
 	G4String fParticle;
-	HistoManager* fHisto;
 };
 
 #endif

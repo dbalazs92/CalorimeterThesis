@@ -1,5 +1,5 @@
 /**
- * @file /DB_EMCal/DB_EMCal.cc
+ * @file /EMCal_MT/EMCal_MT.cc
  * @author Balázs Demeter <balazsdemeter92@gmail.com>
  * @date 2017/09/15 <creation>
  * 
@@ -50,19 +50,15 @@ int main(int argc,char** argv)
   G4double Energy=0.0;
   G4String PhysList="QGSP_BERT";
   G4String Particle="gamma";
-  G4String RootFile="Default.root";
   
-  if (argc==7)
+  if (argc==6)
   {  
     NoE=atoi(argv[1]);
     Energy=atof(argv[2]);
     PhysList=argv[3];
     Particle=argv[4];
     CutEx=atoi(argv[5]);
-    RootFile=argv[6];
   }
-  HistoManager* histo = new HistoManager();
-  histo->Book(RootFile);
   
 #ifdef G4MULTITHREADED
   G4MTRunManager* runManager = new G4MTRunManager;
@@ -75,13 +71,13 @@ int main(int argc,char** argv)
   
   runManager->SetUserInitialization(new DetectorConstruction());
   runManager->SetUserInitialization(new PhysicsList(PhysList,CutEx));
-  runManager->SetUserInitialization(new ActionInitialization(Energy, Particle, histo));
+  runManager->SetUserInitialization(new ActionInitialization(Energy, Particle));
 
   G4VisManager* visManager = new G4VisExecutive;
   visManager->Initialize();
   G4UImanager* UImanager = G4UImanager::GetUIpointer();
 
-  if (argc==7)
+  if (argc==6)
   {   
     /// batch
    runManager->Initialize();

@@ -1,5 +1,5 @@
 /**
- * @file /DB_EMCal/src/EventAction.cc
+ * @file /EMCal_MT/src/EventAction.cc
  * @author Balázs Demeter <balazsdemeter92@gmail.com>
  * @date 2017/09/15 <creation>
  * 
@@ -13,8 +13,8 @@
 
 /// @brief Constructor of Event action
 
-EventAction::EventAction(HistoManager* histo)
-: G4UserEventAction(), fHistoManager(histo)
+EventAction::EventAction()
+: G4UserEventAction()
 {} 
 
 /// @brief Destructor of Event action

@@ -1,5 +1,5 @@
 /**
- * @file /DB_EMCal/src/PrimaryGeneratorAction.cc
+ * @file /EMCal_MT/src/PrimaryGeneratorAction.cc
  * @author Balázs Demeter <balazsdemeter92@gmail.com>
  * @date 2017/09/15 <creation>
  * 

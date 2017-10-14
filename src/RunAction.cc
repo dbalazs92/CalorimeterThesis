@@ -1,5 +1,5 @@
 /**
- * @file /DB_EMCal/src/RunAction.cc
+ * @file /EMCal_MT/src/RunAction.cc
  * @author Balázs Demeter <balazsdemeter92@gmail.com>
  * @date 2017/09/15 <creation>
  * 
@@ -13,8 +13,8 @@
 
 /// @brief Constructor of Run
 
-RunAction::RunAction(HistoManager* histo)
-: G4UserRunAction(), fHisto(histo)
+RunAction::RunAction()
+: G4UserRunAction()
 {   
 }
 
@@ -52,8 +52,6 @@ void RunAction::EndOfRunAction(const G4Run*)
      << G4endl
      << "--------------------End of Local Run------------------------";
   }
-  
-  fHisto->Save();
 }
 
 /// End of file
