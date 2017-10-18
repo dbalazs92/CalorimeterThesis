@@ -28,13 +28,17 @@ SteppingAction::~SteppingAction()
 
 void SteppingAction::UserSteppingAction(const G4Step* fStep)
 {
-  
+
   G4double edepStep = fStep->GetTotalEnergyDeposit();
   G4Track * fTrack = fStep->GetTrack();
   G4int trackID=fTrack->GetTrackID();
-  
+  G4int tID=fEventAction->GetTempID();
+
+  //G4double preTime = fStep->GetPreStepPoint()->GetLocalTime();
+  G4double postTime = fStep->GetPostStepPoint()->GetLocalTime();
+
   if(fTrack->GetTrackStatus()!=fAlive) { return; } /// check if it is alive
-  
+
   G4ParticleDefinition *particle=fTrack->GetDefinition();
 
   G4VPhysicalVolume* prevolume  =
@@ -51,33 +55,30 @@ void SteppingAction::UserSteppingAction(const G4Step* fStep)
   G4double postY = fStep->GetPostStepPoint()->GetPosition().y();
   G4double postZ = fStep->GetPostStepPoint()->GetPosition().z();
   G4double postkinE  = fStep->GetPostStepPoint()->GetKineticEnergy();
-  
-  G4int copynum = fStep->GetPostStepPoint()->GetTouchableHandle()->GetCopyNumber();
-  G4int copynumpre = fStep->GetPreStepPoint()->GetTouchableHandle()->GetCopyNumber();
 
-  G4ThreeVector momentumdirection = fTrack->GetMomentumDirection();
-  G4double theta = momentumdirection.theta();
+  ///G4int copynum = fStep->GetPostStepPoint()->GetTouchableHandle()->GetCopyNumber();
+  ///G4int copynumpre = fStep->GetPreStepPoint()->GetTouchableHandle()->GetCopyNumber();
+
+  ///G4ThreeVector momentumdirection = fTrack->GetMomentumDirection();
+  ///G4double theta = momentumdirection.theta();
 
   G4String particleName = particle->GetParticleName();
   G4String preName=prevolume->GetName();
   G4String postName=postvolume->GetName();
   G4String procN;
+
   if((fTrack->GetCreatorProcess()!=0)&&(postName!="World"))
   {
   procN=fTrack->GetCreatorProcess()->GetProcessName();
-  
-  G4cout<<"EMCal_MT edepStep "<<postX/cm<<" "<<postY/cm<<" "<<postZ/cm<<" "<<edepStep/eV<<G4endl;
-  
-  if(((postName=="Detector"))&&((preName=="fiberInterior")||(preName=="fiberCover")))
-  {
-	  G4cout<<"EMCal_MT inDet "<<postX/cm<<" "<<postY/cm<<" "<<postZ/cm<<" "<<postkinE/eV<<G4endl;
+
+  //if(edepStep!=0){
+      G4cout<<"CalDat "<<particleName<<" "<<procN<<" "<<trackID<<" "<<edepStep/eV<<" "<<postkinE/eV<<" "<<preX/cm<<" "<<preY/cm<<" "<<preZ/cm
+            <<" "<<postX/cm<<" "<<postY/cm<<" "<<postZ/cm<<" "<<preName<<" "<<postName<<" "<<postTime<<G4endl;//}
+      fEventAction->SetTempID(trackID);
+      if(postName=="Detector"){fTrack->SetTrackStatus(fStopAndKill);}
   }
-  if(preName=="Detector")
-  {
-	  fTrack->SetTrackStatus(fStopAndKill);  
-  }
-   
-  }
+
+
 }
 
 /// End of file

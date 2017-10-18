@@ -48,7 +48,7 @@ set(EXAMPLEEMCal_MT_SCRIPTS
   run.png
   gui.mac
   vis.mac
-  plotGraph.cc
+  Analysis.cc
   )
 
 foreach(_script ${EXAMPLEEMCal_MT_SCRIPTS})

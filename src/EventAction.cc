@@ -14,8 +14,8 @@
 /// @brief Constructor of Event action
 
 EventAction::EventAction()
-: G4UserEventAction()
-{} 
+: G4UserEventAction(), tempID(0)
+{}
 
 /// @brief Destructor of Event action
 
@@ -41,9 +41,8 @@ void EventAction::BeginOfEventAction(const G4Event*)
  **/
 
 void EventAction::EndOfEventAction(const G4Event*)
-{   
-  Run* run = static_cast<Run*>(G4RunManager::GetRunManager()->GetNonConstCurrentRun()); /// accumulate statistics in DERun
-}
+{
 
+}
 
 /// End of file

@@ -20,7 +20,7 @@ class Run : public G4Run
 public:
   Run();
   virtual ~Run();
-  
+
   virtual void Merge(const G4Run*);
   
 };
