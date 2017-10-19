@@ -64,6 +64,7 @@ int main(int argc,char** argv)
   G4MTRunManager* runManager = new G4MTRunManager;
   unsigned nthreads = 8;
   runManager->SetNumberOfThreads(nthreads);
+  G4cout<<"xXx Megy a Multi"<<G4endl;
   
 #else
   G4RunManager* runManager = new G4RunManager;
