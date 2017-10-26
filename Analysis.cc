@@ -31,7 +31,8 @@ using namespace std;
 
 void Analysis(){
 	
-	string name1, particleName, procN, preName, postName;
+	string name1,name2, particleName, procN, preName, postName;
+	char jel;
 	int trackID;
 	double prekinE, postkinE, preX, preY, preZ, postX, postY, postZ, postTime, edep;
 	
@@ -41,10 +42,10 @@ void Analysis(){
 	TCanvas  * cX = new TCanvas("Canvas","Results",1200,600);
     cX->Divide(2,1);
     
-	ifstream in1("test2.txt");
+	ifstream in1("run1.txt");
 	
 	while(!in1.eof()){
-		in1>>name1>>particleName>>procN>>trackID>>edep>>postkinE>>preX>>preY>>preZ>>postX>>postY>>postZ>>preName>>postName>>postTime;
+		in1>>name2>>jel>>name1>>particleName>>procN>>trackID>>edep>>postkinE>>preX>>preY>>preZ>>postX>>postY>>postZ>>preName>>postName>>postTime;
 		h1->Fill(postZ,edep);
 		if(postName=="Detector") h2->Fill(postTime, 1);
 	}

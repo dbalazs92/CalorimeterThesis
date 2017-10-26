@@ -14,7 +14,7 @@ The calorimeter will be divided into individual towers with about ~2500 fibers.
 A calorimeter 18 radiation lengths thick occupies 12.6 cm in radius, and with light collection, sensors, preamps, and cables, the calorimeter is expected to occupy radial space of about 25 cm. 
 The fibers are single-cladded Kuraray SCSF-78 with 0.47 mm diameter fibers on 1 mm centers. 
 For starting program in batch mode (no UI), 4 parameters are needed: Number of events, energy of bullet particle (in GeV), Hadronic physics list and type of particles. 
-The first two parameters and the last are numbers while others are strings for the program. Results can be shown with running Analysis.cc ROOT macro. 
+The first two parameters and the last are numbers while others are strings for the program. Results can be shown with running Analysis.cc ROOT macro. MultiThreading is enabled.
 
 ## Download and build
 
@@ -24,7 +24,7 @@ The first two parameters and the last are numbers while others are strings for t
 
 * Qt4 (Tested on version 5.9.1) 
 
-* GEANT 4.10.03 or newer
+* GEANT 4.10.02 or newer
 
 * CLHEP 2.3.4.4 or newer
 
@@ -63,7 +63,7 @@ After giving the necessary permissions for setup script, run:
 After build, in the directory of build (emcal_build), open a terminal window and enter:
 
 ```
-./EMCal_MT <numberofevents> <energyofparticleingev> <physicslist> <typeofparticle> <typeofcut>
+./EMCal_MT <numberofevents> <energyofparticleingev> <physicslist> <typeofparticle> <typeofcut> <noofthreads>
 ```
 
 #### Run in interactive mode
@@ -75,6 +75,8 @@ After build, in the directory of program (EMCal_MT), open a terminal window and 
 ```
 
 ## Updates
+
+* 2017/10/26 - 'v1.4' - Analysis modifications and Multi-Threaded is enabled
 
 * 2017/10/18 - 'v1.2' - Minimal modifications in SteppingAction
 

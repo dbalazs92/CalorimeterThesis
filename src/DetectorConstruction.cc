@@ -378,7 +378,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   ///assume 100 times larger than the rayleigh scattering for now.
   
   G4double mie_ps[] = {
-     167024.4*m, 158726.7*m, 150742  *m,
+     167024.4*m, 158726.7*m, 150742.0*m,
      143062.5*m, 135680.2*m, 128587.4*m,
      121776.3*m, 115239.5*m, 108969.5*m,
      102958.8*m, 97200.35*m, 91686.86*m,

@@ -13,6 +13,7 @@
 #define PhysicsList_h 1
 
 #include "G4VModularPhysicsList.hh"
+#include "G4VPhysicsConstructor.hh"
 #include "G4UAtomicDeexcitation.hh"
 #include "G4Threading.hh"
 #include "G4LossTableManager.hh"
@@ -105,7 +106,6 @@ private:
 
 protected:
   G4ParticleTable* theParticleTable = G4ParticleTable::GetParticleTable();
-  G4ParticleTable::G4PTblDicIterator* theParticleIterator = theParticleTable->GetIterator();
 };
 
 #endif

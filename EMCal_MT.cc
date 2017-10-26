@@ -47,25 +47,26 @@ int main(int argc,char** argv)
   /// parameter from command line
   unsigned int NoE=0;
   unsigned int CutEx=0;
+  unsigned int nThreads = 1;
   G4double Energy=0.0;
   G4String PhysList="QGSP_BERT";
   G4String Particle="gamma";
   
-  if (argc==6)
+  if (argc==7)
   {  
     NoE=atoi(argv[1]);
     Energy=atof(argv[2]);
     PhysList=argv[3];
     Particle=argv[4];
     CutEx=atoi(argv[5]);
+    nThreads=atoi(argv[6]);
   }
   
 #ifdef G4MULTITHREADED
   G4MTRunManager* runManager = new G4MTRunManager;
-  unsigned nthreads = 8;
-  runManager->SetNumberOfThreads(nthreads);
-  G4cout<<"xXx Megy a Multi"<<G4endl;
-  
+
+  runManager->SetNumberOfThreads(nThreads);
+
 #else
   G4RunManager* runManager = new G4RunManager;
 #endif
@@ -78,7 +79,7 @@ int main(int argc,char** argv)
   visManager->Initialize();
   G4UImanager* UImanager = G4UImanager::GetUIpointer();
 
-  if (argc==6)
+  if (argc==7)
   {   
     /// batch
    runManager->Initialize();
