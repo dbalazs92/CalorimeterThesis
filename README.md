@@ -76,11 +76,11 @@ After build, in the directory of program (EMCal_MT), open a terminal window and 
 
 ## Updates
 
+* 2017/11/09 - 'v1.5' - Fixed PhysicsList and minor geometry modifications
+
 * 2017/10/26 - 'v1.4' - Analysis modifications and Multi-Threaded is enabled
 
 * 2017/10/18 - 'v1.2' - Minimal modifications in SteppingAction
-
-* 2017/10/06 - 'v1.1b' - Beta for run in multi threads
 
 * 2017/09/30 - 'v1.0' - One fiber with tungsten cover and detector plate
 

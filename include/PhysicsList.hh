@@ -51,6 +51,7 @@
 #include "G4Electron.hh"
 #include "G4Positron.hh"
 #include "G4Proton.hh"
+#include "G4VUserPhysicsList.hh"
 
 
 class G4Cerenkov;

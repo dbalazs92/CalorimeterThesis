@@ -408,17 +408,18 @@ void PhysicsList::ConstructOp()
   fMieHGScatteringProcess->SetVerboseLevel(fVerboseLevel);
   fBoundaryProcess->SetVerboseLevel(fVerboseLevel);
 
-  /// Use Birks Correction in the Scintillation process
+  // Use Birks Correction in the Scintillation process
   if(G4Threading::IsMasterThread())
   {
     G4EmSaturation* emSaturation =
-              G4LossTableManager::Instance()->EmSaturation();
-      fScintillationProcess->AddSaturation(emSaturation);
+            G4LossTableManager::Instance()->EmSaturation();
+    fScintillationProcess->AddSaturation(emSaturation);
   }
 
-  theParticleIterator->reset();
-  while( (*theParticleIterator)() ){
-    G4ParticleDefinition* particle = theParticleIterator->value();
+  auto particleIterator=GetParticleIterator();
+  particleIterator->reset();
+  while( (*particleIterator)() ){
+    G4ParticleDefinition* particle = particleIterator->value();
     G4ProcessManager* pmanager = particle->GetProcessManager();
     G4String particleName = particle->GetParticleName();
     if (fCerenkovProcess->IsApplicable(*particle)) {
