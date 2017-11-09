@@ -142,7 +142,6 @@ void PhysicsList::ConstructProcess()
     /// transportation
     
     AddTransportation();
-    ConstructOp();
 
     /// electromagnetic physics list
     
@@ -151,8 +150,9 @@ void PhysicsList::ConstructProcess()
     /// decay process
     
     fDecay->ConstructProcess();
-
     
+    ConstructOp();
+
     G4double lowEnergyEnd=1000*eV;
       
       /// Deexcitation

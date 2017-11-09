@@ -95,7 +95,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
     G4Material* tank_mat = nist->FindOrBuildMaterial("G4_W");
 
-    G4LogicalVolume* logicTank = new G4LogicalVolume(subTank, tank_mat, "Tank");
+    G4LogicalVolume* logicTank = new G4LogicalVolume(solidTank, tank_mat, "Tank");
 
     G4Colour tankColour( 0.0, 1.0, 0.0, 0.4 );
     G4VisAttributes* tankVisAtt = new G4VisAttributes( tankColour );
@@ -123,8 +123,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   **/
 
   G4ThreeVector posFiber = posTank;
-  G4Tubs* fiberInterior  = new G4Tubs("fInterior", 0*cm, (r-(r*0.021)), tank_sizeZ, 0*deg, 360*deg);
-  G4Tubs* fiberCover 	 = new G4Tubs("fCover", (r-(r*0.02)), r*1.001, tank_sizeZ, 0*deg, 360*deg);
+  G4Tubs* fiberInterior  = new G4Tubs("fInterior", 0*cm, (r-(r*0.02)), tank_sizeZ, 0*deg, 360*deg);
+  G4Tubs* fiberCover 	 = new G4Tubs("fCover", (r-(r*0.02)), r, tank_sizeZ, 0*deg, 360*deg);
 
 
   G4Material* pmma = new G4Material("PMMA", density_pmma = 1.190*g/cm3, nelements=3);
@@ -145,7 +145,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   fiberCoverLog->SetVisAttributes(fiberVisAtt);
 
     new G4PVPlacement(0, G4ThreeVector(0,0,0), fiberCoverLog, "fiberCover", logicTank, false, 0, checkOverlaps);
-  new G4PVPlacement(0, G4ThreeVector(0,0,0), fiberInteriorLog, "fiberInterior", fiberCoverLog, false, 0, checkOverlaps);
+  new G4PVPlacement(0, G4ThreeVector(0,0,0), fiberInteriorLog, "fiberInterior", logicTank, false, 0, checkOverlaps);
 
 /**
   * ... Detector ...
