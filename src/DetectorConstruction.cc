@@ -38,10 +38,10 @@ DetectorConstruction::~DetectorConstruction()
 
 G4VPhysicalVolume* DetectorConstruction::Construct()
 {
-  G4double a, z, density_pmma, density_ps, pos=13, r = (0.47/2)*mm;; /// Useable constants and variables (radius, density and etc.)
-  G4int nelements;
+  G4double a, z, density_pmma, density_ps, pos=18, r = (0.47/2)*mm; /// Useable constants and variables (radius, density and etc.)
+  G4int nelements,multi=6;
 
-  G4double tank_sizeXY = 1.47*mm, tank_sizeZ = 12.6*cm; /// Size of Tank
+  G4double tank_sizeXY = 0.87*mm, tank_sizeZ = 12.6*cm; /// Size of Tank
 
   G4NistManager* nist = G4NistManager::Instance(); /// Get nist material manager
 
@@ -95,13 +95,13 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
     G4Material* tank_mat = nist->FindOrBuildMaterial("G4_W");
 
-    G4LogicalVolume* logicTank = new G4LogicalVolume(solidTank, tank_mat, "Tank");
+    G4LogicalVolume* logicTank = new G4LogicalVolume(subTank, tank_mat, "Tank");
 
     G4Colour tankColour( 0.0, 1.0, 0.0, 0.4 );
     G4VisAttributes* tankVisAtt = new G4VisAttributes( tankColour );
     logicTank->SetVisAttributes(tankVisAtt);
 
-    new G4PVPlacement(0, posTank, logicTank, "Tank", logicWorld, false, 0, checkOverlaps);
+
 
 /**
   *
@@ -143,9 +143,21 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   G4VisAttributes* fiberVisAtt = new G4VisAttributes( fiberColour );
   fiberInteriorLog->SetVisAttributes(fiberVisAtt);
   fiberCoverLog->SetVisAttributes(fiberVisAtt);
-
-    new G4PVPlacement(0, G4ThreeVector(0,0,0), fiberCoverLog, "fiberCover", logicTank, false, 0, checkOverlaps);
-  new G4PVPlacement(0, G4ThreeVector(0,0,0), fiberInteriorLog, "fiberInterior", logicTank, false, 0, checkOverlaps);
+    for(int i=-multi;i<=multi;i++)
+    {
+        for(int j=-multi;j<=multi;j++)
+        {
+        new G4PVPlacement(0,
+                          G4ThreeVector(i*2*tank_sizeXY, j*2*tank_sizeXY, pos*cm),
+                          fiberCoverLog, "fiberCover", logicWorld,
+                          false, 0, checkOverlaps);
+        new G4PVPlacement(0,
+                          G4ThreeVector(i*2*tank_sizeXY, j*2*tank_sizeXY, pos*cm),
+                          fiberInteriorLog, "fiberInterior",
+                          logicWorld, false, 0, checkOverlaps);
+        new G4PVPlacement(0, G4ThreeVector(i*2*tank_sizeXY, j*2*tank_sizeXY, pos*cm), logicTank, "Tank", logicWorld, false, 0, checkOverlaps);
+        }
+    }
 
 /**
   * ... Detector ...
@@ -160,9 +172,9 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   * @param detecVisAtt		Visual attributes of detector
   *
   **/
-
+  int szorzo=(2*multi)+1;
   G4double detec_sizeZ = 1*mm;
-  G4Box* solidDetec = new G4Box("Detector", tank_sizeXY, tank_sizeXY, detec_sizeZ);
+  G4Box* solidDetec = new G4Box("Detector", szorzo*tank_sizeXY, szorzo*tank_sizeXY, detec_sizeZ);
   G4ThreeVector posDetec =G4ThreeVector(0, 0*cm, ((pos*cm)+(tank_sizeZ)+(detec_sizeZ))); ///zpos+(fTank_z)+(mirror_z)
 
   G4Material* detec_mat = nist->FindOrBuildMaterial("G4_Pyrex_Glass");

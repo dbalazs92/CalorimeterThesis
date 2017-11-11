@@ -76,7 +76,7 @@ After build, in the directory of program (EMCal_MT), open a terminal window and 
 
 ## Updates
 
-* 2017/11/09 - 'v1.5.1' - Fixed PhysicsList and minor geometry modifications
+* 2017/11/09 - 'v1.6' - Fixed PhysicsList and Multi-fiber geometry
 
 * 2017/10/26 - 'v1.4' - Analysis modifications and Multi-Threaded is enabled
 

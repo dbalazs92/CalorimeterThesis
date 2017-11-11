@@ -67,20 +67,19 @@ void SteppingAction::UserSteppingAction(const G4Step* fStep)
   G4String postName=postvolume->GetName();
   G4String procN;
 
-  if(fTrack->GetCreatorProcess()!=0)
-  {
-  procN=fTrack->GetCreatorProcess()->GetProcessName();
-  if(postName=="World")
-  {
-    fTrack->SetTrackStatus(fStopAndKill);
-  }
-  //if(edepStep!=0){
-      G4cout<<"CalDat "<<particleName<<" "<<procN<<" "<<trackID<<" "<<edepStep/MeV<<" "<<postkinE/eV<<" "<<preX/cm<<" "<<preY/cm<<" "<<preZ/cm
-            <<" "<<postX/cm<<" "<<postY/cm<<" "<<postZ/cm<<" "<<preName<<" "<<postName<<" "<<postTime/ns<<G4endl;//}
+  if(fTrack->GetCreatorProcess()!=0) {
+    procN = fTrack->GetCreatorProcess()->GetProcessName();
+      if (postName == "World") {
+        fTrack->SetTrackStatus(fStopAndKill);
+      }
+      //if(edepStep!=0){
+      G4cout << "CalDat " << particleName << " " << procN << " " << trackID << " " << edepStep / MeV << " "
+             << postkinE / eV << " " << preX / cm << " " << preY / cm << " " << preZ / cm
+             << " " << postX / cm << " " << postY / cm << " " << postZ / cm << " " << preName << " " << postName << " "
+             << postTime / ns << G4endl;//}
       fEventAction->SetTempID(trackID);
-      if(postName=="Detector"){fTrack->SetTrackStatus(fStopAndKill);}
-  }
-
+      if (postName == "Detector") { fTrack->SetTrackStatus(fStopAndKill); }
+    }
 
 }
 
