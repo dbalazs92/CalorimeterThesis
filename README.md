@@ -76,6 +76,8 @@ After build, in the directory of program (EMCal_MT), open a terminal window and 
 
 ## Updates
 
+* 2017/11/16 - 'v1.7' - Added plotHisto
+
 * 2017/11/09 - 'v1.6' - Fixed PhysicsList and Multi-fiber geometry
 
 * 2017/10/26 - 'v1.4' - Analysis modifications and Multi-Threaded is enabled
@@ -87,8 +89,6 @@ After build, in the directory of program (EMCal_MT), open a terminal window and 
 * 2017/09/29 - 'v0.6' - Added summary and parameterisation
 
 * 2017/09/21 - 'v0.4' - Added detector to end of fiber and improved PhysicsList (added hadronic progresses)
-
-* 2017/09/20 - 'v0.3' - Added Optics
 
 * 2017/09/17 - 'v0.2' - Added scripts for build and interactive run
 

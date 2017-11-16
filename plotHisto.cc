@@ -29,7 +29,7 @@
 
 using namespace std;
 
-void Analysis(){
+void plotHisto(int sel){
 	
 	string name1,name2, particleName, procN, preName, postName;
 	char jel;
@@ -41,7 +41,6 @@ void Analysis(){
 	auto localhist = new TH2D("TH2D", "Local", 300, -2, 2, 300, 2, 2);
 	
 	TCanvas  * cX = new TCanvas("Canvas","Results",1200,600);
-    cX->Divide(2,2);
     
 	ifstream in1("text.txt");
 	
@@ -54,14 +53,19 @@ void Analysis(){
 			localhist->Fill(postX,postY,1);
 		}
 	}
-	 
+	if(sel==1)
+	{ 
+	cX->Divide(2,1);
 	cX->cd(1);
     h1->Draw();
     cX->cd(2);
     h2->Draw();
-    cX->cd(3);
+	}
+	else
+	{
+    cX->cd(1);
     localhist->Draw("colz");
-	
+	}
 	in1.close();
 	
 }

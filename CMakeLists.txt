@@ -48,7 +48,7 @@ set(EXAMPLEEMCal_MT_SCRIPTS
   run.png
   gui.mac
   vis.mac
-  Analysis.cc
+  plotHisto.cc
   )
 
 foreach(_script ${EXAMPLEEMCal_MT_SCRIPTS})
