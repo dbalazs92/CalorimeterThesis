@@ -48,18 +48,20 @@ int main(int argc,char** argv)
   unsigned int NoE=0;
   unsigned int CutEx=0;
   unsigned int nThreads = 1;
+    unsigned int fiber = 1;
   G4double Energy=0.0;
   G4String PhysList="QGSP_BERT";
   G4String Particle="gamma";
   
-  if (argc==7)
+  if (argc==8)
   {  
     NoE=atoi(argv[1]);
     Energy=atof(argv[2]);
     PhysList=argv[3];
     Particle=argv[4];
-    CutEx=atoi(argv[5]);
-    nThreads=atoi(argv[6]);
+      fiber=atoi(argv[5]);
+    CutEx=atoi(argv[6]);
+    nThreads=atoi(argv[7]);
   }
   
 #ifdef G4MULTITHREADED
@@ -71,7 +73,7 @@ int main(int argc,char** argv)
   G4RunManager* runManager = new G4RunManager;
 #endif
   
-  runManager->SetUserInitialization(new DetectorConstruction());
+  runManager->SetUserInitialization(new DetectorConstruction(fiber));
   runManager->SetUserInitialization(new PhysicsList(PhysList,CutEx));
   runManager->SetUserInitialization(new ActionInitialization(Energy, Particle));
 
@@ -79,7 +81,7 @@ int main(int argc,char** argv)
   visManager->Initialize();
   G4UImanager* UImanager = G4UImanager::GetUIpointer();
 
-  if (argc==7)
+  if (argc==8)
   {   
     /// batch
    runManager->Initialize();

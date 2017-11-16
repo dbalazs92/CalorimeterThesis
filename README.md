@@ -14,7 +14,7 @@ The calorimeter will be divided into individual towers with about ~2500 fibers.
 A calorimeter 18 radiation lengths thick occupies 12.6 cm in radius, and with light collection, sensors, preamps, and cables, the calorimeter is expected to occupy radial space of about 25 cm. 
 The fibers are single-cladded Kuraray SCSF-78 with 0.47 mm diameter fibers on 1 mm centers. 
 For starting program in batch mode (no UI), 4 parameters are needed: Number of events, energy of bullet particle (in GeV), Hadronic physics list and type of particles. 
-The first two parameters and the last are numbers while others are strings for the program. Results can be shown with running Analysis.cc ROOT macro. MultiThreading is enabled.
+The first two parameters and the last are numbers while others are strings for the program. Results can be shown with running plotHisto.cc ROOT macro. MultiThreading is enabled.
 
 ## Download and build
 
@@ -63,7 +63,7 @@ After giving the necessary permissions for setup script, run:
 After build, in the directory of build (emcal_build), open a terminal window and enter:
 
 ```
-./EMCal_MT <numberofevents> <energyofparticleingev> <physicslist> <typeofparticle> <typeofcut> <noofthreads>
+./EMCal_MT <numberofevents> <energyofparticleingev> <physicslist> <typeofparticle> <fiberparameter> <typeofcut> <noofthreads>
 ```
 
 #### Run in interactive mode
@@ -76,7 +76,7 @@ After build, in the directory of program (EMCal_MT), open a terminal window and 
 
 ## Updates
 
-* 2017/11/16 - 'v1.7' - Added plotHisto
+* 2017/11/16 - 'v1.8' - Added plotHisto and fiber argument
 
 * 2017/11/09 - 'v1.6' - Fixed PhysicsList and Multi-fiber geometry
 

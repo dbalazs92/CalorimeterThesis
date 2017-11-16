@@ -32,11 +32,12 @@
 class DetectorConstruction : public G4VUserDetectorConstruction
 {
   public:
-    DetectorConstruction();
+    DetectorConstruction(G4int fiber);
     virtual ~DetectorConstruction();
 
     virtual G4VPhysicalVolume* Construct();
-  
+private:
+    G4int fFiber;
     
 };
 

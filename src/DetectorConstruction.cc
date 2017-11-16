@@ -20,8 +20,8 @@
 
 /// @brief Constructor of Detector construction
 
-DetectorConstruction::DetectorConstruction()
-: G4VUserDetectorConstruction()
+DetectorConstruction::DetectorConstruction(G4int fiber)
+: G4VUserDetectorConstruction(), fFiber(fiber)
 {}
 
 /// @brief Destructor of Detector construction
@@ -39,7 +39,7 @@ DetectorConstruction::~DetectorConstruction()
 G4VPhysicalVolume* DetectorConstruction::Construct()
 {
   G4double a, z, density_pmma, density_ps, pos=18, r = (0.47/2)*mm; /// Useable constants and variables (radius, density and etc.)
-  G4int nelements,multi=6;
+  G4int nelements;
 
   G4double tank_sizeXY = 0.87*mm, tank_sizeZ = 12.6*cm; /// Size of Tank
 
@@ -143,9 +143,9 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   G4VisAttributes* fiberVisAtt = new G4VisAttributes( fiberColour );
   fiberInteriorLog->SetVisAttributes(fiberVisAtt);
   fiberCoverLog->SetVisAttributes(fiberVisAtt);
-    for(int i=-multi;i<=multi;i++)
+    for(int i=-fFiber;i<=fFiber;i++)
     {
-        for(int j=-multi;j<=multi;j++)
+        for(int j=-fFiber;j<=fFiber;j++)
         {
         new G4PVPlacement(0,
                           G4ThreeVector(i*2*tank_sizeXY, j*2*tank_sizeXY, pos*cm),
@@ -172,7 +172,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   * @param detecVisAtt		Visual attributes of detector
   *
   **/
-  int szorzo=(2*multi)+1;
+  int szorzo=(2*fFiber)+1;
   G4double detec_sizeZ = 1*mm;
   G4Box* solidDetec = new G4Box("Detector", szorzo*tank_sizeXY, szorzo*tank_sizeXY, detec_sizeZ);
   G4ThreeVector posDetec =G4ThreeVector(0, 0*cm, ((pos*cm)+(tank_sizeZ)+(detec_sizeZ))); ///zpos+(fTank_z)+(mirror_z)
