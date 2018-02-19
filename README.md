@@ -76,6 +76,8 @@ After build, in the directory of program (EMCal_MT), open a terminal window and 
 
 ## Updates
 
+* 2018/02/19 - 'v2.0' - Major improvements in geometry and plotHisto
+
 * 2017/11/16 - 'v1.8' - Added plotHisto and fiber argument
 
 * 2017/11/09 - 'v1.6' - Fixed PhysicsList and Multi-fiber geometry

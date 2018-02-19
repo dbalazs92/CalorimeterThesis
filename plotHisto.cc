@@ -1,5 +1,5 @@
 /**
- * @file /EMCal_MT/Analysis.cc
+ * @file /EMCal_MT/plotHisto.cc
  * @author Balázs Demeter <balazsdemeter92@gmail.com>
  * @date 2017/10/15 <creation>
  * 
@@ -29,7 +29,7 @@
 
 using namespace std;
 
-void plotHisto(int sel){
+void plotHisto(){
 	
 	string name1,name2, particleName, procN, preName, postName;
 	char jel;
@@ -53,19 +53,15 @@ void plotHisto(int sel){
 			localhist->Fill(postX,postY,1);
 		}
 	}
-	if(sel==1)
-	{ 
-	cX->Divide(2,1);
+
+	cX->Divide(2,2);
 	cX->cd(1);
     h1->Draw();
     cX->cd(2);
     h2->Draw();
-	}
-	else
-	{
-    cX->cd(1);
+    cX->cd(3);
     localhist->Draw("colz");
-	}
+
 	in1.close();
 	
 }

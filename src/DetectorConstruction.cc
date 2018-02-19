@@ -40,12 +40,13 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 {
   G4double a, z, density_pmma, density_ps, pos=18, r = (0.47/2)*mm; /// Useable constants and variables (radius, density and etc.)
   G4int nelements;
+  int szorzo=(2*fFiber)+1;
 
   G4double tank_sizeXY = 0.87*mm, tank_sizeZ = 12.6*cm; /// Size of Tank
 
   G4NistManager* nist = G4NistManager::Instance(); /// Get nist material manager
 
-  G4bool checkOverlaps = true; /// Option to switch on/off checking of volumes overlaps
+  G4bool checkOverlaps = false; /// Option to switch on/off checking of volumes overlaps
 
   G4Element* C = new G4Element("Carbon", "C", z=6 , a=12.01*g/mole); /// definition of elements for materials
   G4Element* H = new G4Element("Hydrogen", "H", z=1 , a=1.01*g/mole);
@@ -65,7 +66,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
   G4double world_sizeXY = 1.2*m, world_sizeZ  = 1.2*m;
   G4Box* solidWorld = new G4Box("World", world_sizeXY, world_sizeXY, world_sizeZ);
-    G4Tubs* fiberFull 	 = new G4Tubs("Fiber", 0*cm, r, (tank_sizeZ+0.1*cm), 0*deg, 360*deg);
+    //G4Tubs* fiberFull 	 = new G4Tubs("Fiber", 0*cm, r, (tank_sizeZ+0.1*cm), 0*deg, 360*deg);
 
   G4Material* world_mat = nist->FindOrBuildMaterial("G4_Galactic");
 
@@ -90,12 +91,12 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
     G4ThreeVector posTank = G4ThreeVector(0, 0*cm, pos*cm);
 
-    G4Box* solidTank = new G4Box("Tank", tank_sizeXY, tank_sizeXY, tank_sizeZ);
-    G4SubtractionSolid* subTank = new G4SubtractionSolid("Tank", solidTank, fiberFull, 0, G4ThreeVector(0,0,0));
+    G4Box* solidTank = new G4Box("Tank", szorzo*tank_sizeXY, szorzo*tank_sizeXY, tank_sizeZ);
+    //G4SubtractionSolid* subTank = new G4SubtractionSolid("Tank", solidTank, fiberFull, 0, G4ThreeVector(0,0,0));
 
     G4Material* tank_mat = nist->FindOrBuildMaterial("G4_W");
 
-    G4LogicalVolume* logicTank = new G4LogicalVolume(subTank, tank_mat, "Tank");
+    G4LogicalVolume* logicTank = new G4LogicalVolume(solidTank, tank_mat, "Tank");
 
     G4Colour tankColour( 0.0, 1.0, 0.0, 0.4 );
     G4VisAttributes* tankVisAtt = new G4VisAttributes( tankColour );
@@ -143,19 +144,25 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   G4VisAttributes* fiberVisAtt = new G4VisAttributes( fiberColour );
   fiberInteriorLog->SetVisAttributes(fiberVisAtt);
   fiberCoverLog->SetVisAttributes(fiberVisAtt);
+  
+  G4VPhysicalVolume* fiberCover_phys;
+  G4VPhysicalVolume* fiberInterior_phys;
+  G4VPhysicalVolume* Tank_phys;
+  Tank_phys=new G4PVPlacement(0, G4ThreeVector(0, 0, pos*cm), logicTank, "Tank", logicWorld, false, 0, checkOverlaps);
     for(int i=-fFiber;i<=fFiber;i++)
     {
         for(int j=-fFiber;j<=fFiber;j++)
         {
-        new G4PVPlacement(0,
-                          G4ThreeVector(i*2*tank_sizeXY, j*2*tank_sizeXY, pos*cm),
-                          fiberCoverLog, "fiberCover", logicWorld,
+			
+        fiberCover_phys=new G4PVPlacement(0,
+                          G4ThreeVector(i*2*tank_sizeXY, j*2*tank_sizeXY, 0*cm),
+                          fiberCoverLog, "fiberCover", logicTank,
                           false, 0, checkOverlaps);
-        new G4PVPlacement(0,
-                          G4ThreeVector(i*2*tank_sizeXY, j*2*tank_sizeXY, pos*cm),
+        fiberInterior_phys=new G4PVPlacement(0,
+                          G4ThreeVector(i*2*tank_sizeXY, j*2*tank_sizeXY, 0*cm), // fent is lent is pos*cm
                           fiberInteriorLog, "fiberInterior",
-                          logicWorld, false, 0, checkOverlaps);
-        new G4PVPlacement(0, G4ThreeVector(i*2*tank_sizeXY, j*2*tank_sizeXY, pos*cm), logicTank, "Tank", logicWorld, false, 0, checkOverlaps);
+                          logicTank, false, 0, checkOverlaps);
+        
         }
     }
 
@@ -172,7 +179,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   * @param detecVisAtt		Visual attributes of detector
   *
   **/
-  int szorzo=(2*fFiber)+1;
+  
   G4double detec_sizeZ = 1*mm;
   G4Box* solidDetec = new G4Box("Detector", szorzo*tank_sizeXY, szorzo*tank_sizeXY, detec_sizeZ);
   G4ThreeVector posDetec =G4ThreeVector(0, 0*cm, ((pos*cm)+(tank_sizeZ)+(detec_sizeZ))); ///zpos+(fTank_z)+(mirror_z)
@@ -184,8 +191,10 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   G4Colour detColour( 1.0, 1.0, 1.0, 1.0 );
   G4VisAttributes* detVisAtt = new G4VisAttributes(detColour);
   logicDetec->SetVisAttributes(detVisAtt);
+  
+  
 
-  new G4PVPlacement(0,posDetec, logicDetec, "Detector", logicWorld, false, 0, checkOverlaps);
+  G4VPhysicalVolume* Detector_phys = new G4PVPlacement(0,posDetec, logicDetec, "Detector", logicWorld, false, 0, checkOverlaps);
 
 /// @brief Energy of photons in fiber table
 
@@ -299,42 +308,33 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
 /// @brief Fiber's surface optical definition
 
-  G4OpticalSurface*  fiberInteriorSurface = new G4OpticalSurface("fiberInteriorOpticalSurface");
-  fiberInteriorSurface->SetType(dielectric_dielectric);
-  fiberInteriorSurface->SetFinish(polished);
-  fiberInteriorSurface->SetModel(unified);
+  G4OpticalSurface*  fiberInterior_fiberCoverSurface = new G4OpticalSurface("fiberInterior_fiberCoverOpticalSurface");
+  fiberInterior_fiberCoverSurface->SetType(dielectric_dielectric);
+  fiberInterior_fiberCoverSurface->SetFinish(polished);
+  fiberInterior_fiberCoverSurface->SetModel(unified);
+  
+  new G4LogicalBorderSurface("fiberInterior_fiberCoverSurface", fiberInterior_phys,fiberCover_phys,fiberInterior_fiberCoverSurface);
 
-  G4OpticalSurface*  fiberCoverSurface = new G4OpticalSurface("fiberCoverSurfaceOpticalSurface");
-  fiberCoverSurface->SetType(dielectric_dielectric);
-  fiberCoverSurface->SetFinish(polished);
-  fiberCoverSurface->SetModel(unified);
-
-  G4LogicalSkinSurface* fiberInteriorLogSurface = new G4LogicalSkinSurface("fiberInteriorLogSurface", fiberInteriorLog, fiberInteriorSurface);
-  G4LogicalSkinSurface* fiberCoverLogSurface = new G4LogicalSkinSurface("fiberCoverLogSurface", fiberCoverLog, fiberCoverSurface);
-
-  G4OpticalSurface* fiberInteriorSurfaceDynamic = dynamic_cast <G4OpticalSurface*>(fiberInteriorLogSurface->GetSurface(fiberInteriorLog)->GetSurfaceProperty());
-
-  if (fiberInteriorSurfaceDynamic)
-  {
-	  fiberInteriorSurfaceDynamic->DumpInfo();
-  }
-
-  G4OpticalSurface* fiberCoverSurfaceDynamic = dynamic_cast <G4OpticalSurface*>(fiberCoverLogSurface->GetSurface(fiberCoverLog)->GetSurfaceProperty());
-
-  if (fiberCoverSurfaceDynamic)
-  {
-	  fiberCoverSurfaceDynamic->DumpInfo();
-  }
-
-/// @brief Detector's surface optical definition
-
-  G4OpticalSurface*  DetectorSurface = new G4OpticalSurface("DetectorSurface");
-
-  DetectorSurface->SetType(dielectric_metal);
-  DetectorSurface->SetFinish(polished);
-  DetectorSurface->SetModel(unified);
-
-  G4LogicalSkinSurface* detectorLogSurface = new G4LogicalSkinSurface("DetectorSurface", logicDetec, DetectorSurface);
+  G4OpticalSurface*  fiberCover_TankSurface = new G4OpticalSurface("fiberCover_TankOpticalSurface");
+  fiberCover_TankSurface->SetType(dielectric_dielectric);
+  fiberCover_TankSurface->SetFinish(polishedbackpainted);
+  fiberCover_TankSurface->SetModel(unified);
+  
+  new G4LogicalBorderSurface("fiberCover_TankSurface", fiberCover_phys,Tank_phys,fiberCover_TankSurface);
+  
+  G4OpticalSurface*  Tank_DetectorSurface = new G4OpticalSurface("Tank_DetectorOpticalSurface");
+  Tank_DetectorSurface->SetType(dielectric_metal);
+  Tank_DetectorSurface->SetFinish(ground);
+  Tank_DetectorSurface->SetModel(unified);
+  
+  new G4LogicalBorderSurface("Tank_DetectorSurface", Tank_phys,Detector_phys,Tank_DetectorSurface);
+  
+  G4OpticalSurface*  fiberInterior_DetectorSurface = new G4OpticalSurface("fiberInterior_DetectorSurface");
+  fiberInterior_DetectorSurface->SetType(dielectric_metal);
+  fiberInterior_DetectorSurface->SetFinish(ground);
+  fiberInterior_DetectorSurface->SetModel(unified);
+  
+  new G4LogicalBorderSurface("fiberInterior_DetectorSurface", fiberInterior_phys,Detector_phys,fiberInterior_DetectorSurface);
 
 /// @brief Fiber scintillationing
 
