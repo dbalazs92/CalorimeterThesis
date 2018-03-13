@@ -28,7 +28,7 @@
 class PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
 {
   public:
-    PrimaryGeneratorAction(G4double E0, G4String Particle);    
+    PrimaryGeneratorAction(G4double E0, G4String Particle, G4int Fiber);    
     virtual ~PrimaryGeneratorAction();
 
     virtual void GeneratePrimaries(G4Event*);         
@@ -38,6 +38,7 @@ class PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
     G4double rad;
     G4double fEnergy;
     G4String fParticle;
+    G4int 	 fFiber;
 
 };
 

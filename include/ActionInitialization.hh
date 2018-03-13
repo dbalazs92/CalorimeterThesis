@@ -21,7 +21,7 @@
 class ActionInitialization : public G4VUserActionInitialization
 {
   public:
-    ActionInitialization(G4double e0, G4String Particle);
+    ActionInitialization(G4double e0, G4String Particle, G4int Fiber);
     virtual ~ActionInitialization();
 
     virtual void BuildForMaster() const;
@@ -30,6 +30,7 @@ class ActionInitialization : public G4VUserActionInitialization
   private:
 	G4double fEnergy;
 	G4String fParticle;
+	G4int 	 fFiber;
 };
 
 #endif

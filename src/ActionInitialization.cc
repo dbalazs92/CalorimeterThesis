@@ -19,8 +19,8 @@
  * 
  **/
 
-ActionInitialization::ActionInitialization(G4double e0, G4String Particle)
- : G4VUserActionInitialization(), fParticle(Particle), fEnergy(e0)
+ActionInitialization::ActionInitialization(G4double e0, G4String Particle, G4int Fiber)
+ : G4VUserActionInitialization(), fParticle(Particle), fEnergy(e0), fFiber(Fiber)
 {
 }
 
@@ -42,7 +42,7 @@ void ActionInitialization::BuildForMaster() const
 void ActionInitialization::Build() const
 {
   
-  SetUserAction(new PrimaryGeneratorAction(fEnergy,fParticle));
+  SetUserAction(new PrimaryGeneratorAction(fEnergy,fParticle, fFiber));
   SetUserAction(new RunAction());
   
   EventAction* eventAction = new EventAction();

@@ -20,6 +20,7 @@
 #include "G4ParticleDefinition.hh"
 #include "G4SystemOfUnits.hh"
 #include "Randomize.hh"
+#include <cstdlib>
 
 /** @brief Constructor of Primary generator action
  *
@@ -28,12 +29,11 @@
  * 
  **/
 
-PrimaryGeneratorAction::PrimaryGeneratorAction(G4double E0, G4String Particle)
+PrimaryGeneratorAction::PrimaryGeneratorAction(G4double E0, G4String Particle, G4int Fiber)
 : G4VUserPrimaryGeneratorAction(),
-  fParticleGun(0),fParticle(Particle),fEnergy(E0)
+  fParticleGun(0),fParticle(Particle),fEnergy(E0), fFiber(Fiber)
 {
   G4int n_particle = 1;   ///particles per event
-  rad = 0.048*mm;     ///radius
   fParticleGun  = new G4ParticleGun(n_particle);
 
   G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable(); /// default particle kinematic
@@ -56,22 +56,18 @@ PrimaryGeneratorAction::~PrimaryGeneratorAction()
 
 void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
-
-  fParticleGun->SetParticlePosition(G4ThreeVector(0,0,0));
-  fParticleGun->GeneratePrimaryVertex(anEvent);
-  if(rad!=0.0)
+  G4double phi, r,rRand,ux,uy; 
+  G4int szorzo=(2*fFiber)+1;
+    if(rad!=0.0)
   {
-	G4double  ux, uy, uz, a, b;
-	a=G4UniformRand();
-	b=G4UniformRand();
-	if(a>0.5){ux = rad*G4UniformRand();}
-	else{ux = -rad*G4UniformRand();}
-	if(b>0.5){uy = rad*G4UniformRand();}
-	else{uy = -rad*G4UniformRand();}
-	uz = 1.0;///cosTheta;
-	G4ThreeVector Pi_random_axis(ux,uy,uz);
-	
-	fParticleGun->SetParticleMomentumDirection(Pi_random_axis);
+	phi=((double)rand()/(double)RAND_MAX)*M_PI*2;
+	rRand=((double)rand()/(double)RAND_MAX);
+	r=0.87*szorzo*rRand;  
+	ux=r*cos(phi);
+	uy=r*sin(phi);  
+	fParticleGun->SetParticlePosition(G4ThreeVector(ux,uy,0));
+	fParticleGun->GeneratePrimaryVertex(anEvent);
+	fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0,0,1));
   }
 }
 
