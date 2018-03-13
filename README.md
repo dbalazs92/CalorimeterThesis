@@ -76,6 +76,8 @@ After build, in the directory of program (EMCal_MT), open a terminal window and 
 
 ## Updates
 
+* 2018/03/13 - 'v2.1' - Implementation of Box–Muller transform in PGA
+
 * 2018/02/19 - 'v2.0' - Major improvements in geometry and plotHisto
 
 * 2017/11/16 - 'v1.8' - Added plotHisto and fiber argument
