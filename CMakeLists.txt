@@ -1,4 +1,4 @@
-# $Id: CMakeLists.txt 86065 2014-11-07 08:51:15Z gcosmo $
+# $Id: CMakeLists.txt 86065 2017-09-09 06:30:01Z Balázs Demeter $
 
 #----------------------------------------------------------------------------
 # Setup the project
@@ -48,7 +48,7 @@ set(EXAMPLEEMCal_MT_SCRIPTS
   run.png
   gui.mac
   vis.mac
-  plotHisto.cc
+  macroROOT.cc
   )
 
 foreach(_script ${EXAMPLEEMCal_MT_SCRIPTS})
