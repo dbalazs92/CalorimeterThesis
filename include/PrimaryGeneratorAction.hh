@@ -35,10 +35,10 @@ class PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
   
   private:
     G4ParticleGun*  fParticleGun; /// pointer for G4 gun class
-    G4double rad;
     G4double fEnergy;
     G4String fParticle;
     G4int 	 fFiber;
+    G4bool 	 fBoxMuller;
 
 };
 

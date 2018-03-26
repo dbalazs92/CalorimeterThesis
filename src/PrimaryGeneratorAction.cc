@@ -31,7 +31,7 @@
 
 PrimaryGeneratorAction::PrimaryGeneratorAction(G4double E0, G4String Particle, G4int Fiber)
 : G4VUserPrimaryGeneratorAction(),
-  fParticleGun(0),fParticle(Particle),fEnergy(E0), fFiber(Fiber)
+  fParticleGun(0),fParticle(Particle),fEnergy(E0), fFiber(Fiber), fBoxMuller(true)
 {
   G4int n_particle = 1;   ///particles per event
   fParticleGun  = new G4ParticleGun(n_particle);
@@ -40,7 +40,7 @@ PrimaryGeneratorAction::PrimaryGeneratorAction(G4double E0, G4String Particle, G
   G4ParticleDefinition* particle = particleTable->FindParticle(fParticle);
   fParticleGun->SetParticleDefinition(particle);
   
-  if(rad==0.0){fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0.,0.,1.));}
+  if(fBoxMuller==false){fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0.,0.,1.));}
 
   fParticleGun->SetParticleEnergy(fEnergy*GeV);
 }
@@ -56,19 +56,23 @@ PrimaryGeneratorAction::~PrimaryGeneratorAction()
 
 void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
-  G4double phi, r,rRand,ux,uy; 
-  G4int szorzo=(2*fFiber)+1;
-    if(rad!=0.0)
-  {
+	if(fBoxMuller==true)
+	{
+	G4double phi, r,rRand,ux,uy;
 	phi=((double)rand()/(double)RAND_MAX)*M_PI*2;
 	rRand=((double)rand()/(double)RAND_MAX);
-	r=0.87*szorzo*rRand;  
+	r=0.87*(fFiber/2)*rRand;  
 	ux=r*cos(phi);
 	uy=r*sin(phi);  
 	fParticleGun->SetParticlePosition(G4ThreeVector(ux,uy,0));
 	fParticleGun->GeneratePrimaryVertex(anEvent);
 	fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0,0,1));
-  }
+	}
+	else
+	{
+	fParticleGun->SetParticlePosition(G4ThreeVector(0,0,0));
+    fParticleGun->GeneratePrimaryVertex(anEvent);
+	}
 }
 
 /// End of file

@@ -48,7 +48,7 @@ int main(int argc,char** argv)
   unsigned int NoE=0;
   unsigned int CutEx=0;
   unsigned int nThreads = 1;
-  unsigned int fiber = 1;
+  unsigned int fiber = 3;
   G4double Energy=0.0;
   G4String PhysList="QGSP_BERT";
   G4String Particle="gamma";
