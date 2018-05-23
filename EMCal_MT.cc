@@ -26,6 +26,7 @@
 #include "FTFP_BERT.hh"
 #include "G4StepLimiterPhysics.hh"
 #include "Randomize.hh"
+#include "time.h"
 #include "QGSP_BIC.hh"
 
 /**
@@ -63,6 +64,11 @@ int main(int argc,char** argv)
     CutEx=atoi(argv[6]);
     nThreads=atoi(argv[7]);
   }
+  
+  G4Random::setTheEngine(new CLHEP::RanecuEngine);
+
+  G4long seed = time(NULL);
+  CLHEP::HepRandom::setTheSeed(seed);
   
 #ifdef G4MULTITHREADED
   G4MTRunManager* runManager = new G4MTRunManager;
