@@ -48,7 +48,6 @@ set(EXAMPLEEMCal_MT_SCRIPTS
   run.png
   gui.mac
   vis.mac
-  macroROOT.cc
   )
 
 foreach(_script ${EXAMPLEEMCal_MT_SCRIPTS})
