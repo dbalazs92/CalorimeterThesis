@@ -6,51 +6,19 @@
       <config projectName="EMCal_MT" targetName="GDE" />
     </generated>
   </component>
-  <component name="CMakeSettings">
+  <component name="CMakeSettings" AUTO_RELOAD="true">
     <configurations>
-      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" GENERATION_DIR="$PROJECT_DIR$/../Builds/CalorimeterThesis" />
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" GENERATION_DIR="$USER_HOME$/build/CalorimeterThesis" BUILD_OPTIONS="-j4" />
     </configurations>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="68ade811-050e-4754-b408-ba04afcb30ce" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/CalorimeterThesis.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CalorimeterThesis.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt.user" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt.user" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EMCal_MT.cc" beforeDir="false" afterPath="$PROJECT_DIR$/EMCal_MT.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/_config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui.mac" beforeDir="false" afterPath="$PROJECT_DIR$/gui.mac" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/icons.mac" beforeDir="false" afterPath="$PROJECT_DIR$/icons.mac" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/ActionInitialization.hh" beforeDir="false" afterPath="$PROJECT_DIR$/include/ActionInitialization.hh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/DetectorConstruction.hh" beforeDir="false" afterPath="$PROJECT_DIR$/include/DetectorConstruction.hh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/EventAction.hh" beforeDir="false" afterPath="$PROJECT_DIR$/include/EventAction.hh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/PhysicsList.hh" beforeDir="false" afterPath="$PROJECT_DIR$/include/PhysicsList.hh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/PrimaryGeneratorAction.hh" beforeDir="false" afterPath="$PROJECT_DIR$/include/PrimaryGeneratorAction.hh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/Run.hh" beforeDir="false" afterPath="$PROJECT_DIR$/include/Run.hh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/RunAction.hh" beforeDir="false" afterPath="$PROJECT_DIR$/include/RunAction.hh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/SteppingAction.hh" beforeDir="false" afterPath="$PROJECT_DIR$/include/SteppingAction.hh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/interactive.sh" beforeDir="false" afterPath="$PROJECT_DIR$/interactive.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/macroROOT.cc" beforeDir="false" afterPath="$PROJECT_DIR$/macroROOT.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run.png" beforeDir="false" afterPath="$PROJECT_DIR$/run.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup.sh" beforeDir="false" afterPath="$PROJECT_DIR$/setup.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ActionInitialization.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/ActionInitialization.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DetectorConstruction.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/DetectorConstruction.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EventAction.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/EventAction.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PhysicsList.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/PhysicsList.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PrimaryGeneratorAction.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/PrimaryGeneratorAction.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Run.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/Run.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RunAction.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/RunAction.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SteppingAction.cc" beforeDir="false" afterPath="$PROJECT_DIR$/src/SteppingAction.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vis.mac" beforeDir="false" afterPath="$PROJECT_DIR$/vis.mac" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <ignored path="$PROJECT_DIR$/../Builds/CalorimeterThesis/" />
+    <ignored path="$USER_HOME$/build/CalorimeterThesis/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -61,19 +29,15 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="77" lean-forward="true" selection-start-line="8" selection-start-column="77" selection-end-line="8" selection-end-column="77" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="EMCal_MT.cc" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/EMCal_MT.cc">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1170" />
+            <state relative-caret-position="606">
+              <caret line="42" column="4" selection-start-line="42" selection-start-column="4" selection-end-line="42" selection-end-column="4" />
+              <folding>
+                <element signature="e#458#483#0" expanded="true" />
+              </folding>
+            </state>
           </provider>
         </entry>
       </file>
@@ -99,17 +63,16 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-319" />
-    <option name="y" value="151" />
-    <option name="width" value="1322" />
-    <option name="height" value="682" />
+    <option name="x" value="170" />
+    <option name="y" value="121" />
+    <option name="width" value="1026" />
+    <option name="height" value="555" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -117,16 +80,25 @@
               <item name="EMCal_MT" type="b2602c69:ProjectViewProjectNode" />
               <item name="CalorimeterThesis" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="EMCal_MT" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CalorimeterThesis" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/Showe/CMakeLists.txt" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../DEG4-Basic" />
     <property name="settings.editor.selected.configurable" value="CMakeSettings" />
+  </component>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myShowDebugConsoleByDefault" value="true" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -142,7 +114,11 @@
   </component>
   <component name="RunManager" selected="Application.EMCal_MT">
     <configuration name="Build All" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Debug" EXPLICIT_BUILD_TARGET_NAME="all" />
-    <configuration name="EMCal_MT" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="EMCal_MT" TARGET_NAME="EMCal_MT" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="EMCal_MT" RUN_TARGET_NAME="EMCal_MT" />
+    <configuration name="EMCal_MT" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="EMCal_MT" TARGET_NAME="EMCal_MT" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="EMCal_MT" RUN_TARGET_NAME="EMCal_MT">
+      <envs>
+        <env name="LD_LIBRARY_PATH" value="/usr/local/lib:/usr/local/geant4.10.04.p02/lib:/usr/local/CLHEP/2.4.1.0/lib:/usr/local/xerces-c-3.2.1/lib:/usr/local/root-6.14.00/lib/root:/usr/bin/bash " />
+      </envs>
+    </configuration>
     <configuration name="GDE" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="EMCal_MT" TARGET_NAME="GDE" CONFIG_NAME="Debug" />
     <list>
       <item itemvalue="Application.Build All" />
@@ -167,33 +143,49 @@
       <workItem from="1522339903879" duration="643000" />
       <workItem from="1522340685189" duration="1385000" />
       <workItem from="1524758314005" duration="167000" />
+      <workItem from="1531167999689" duration="50000" />
+      <workItem from="1531169621912" duration="61000" />
+      <workItem from="1531171214194" duration="146000" />
+      <workItem from="1531253001492" duration="287000" />
+      <workItem from="1531253327173" duration="228000" />
+      <workItem from="1531253578190" duration="145000" />
+      <workItem from="1531254339650" duration="237000" />
+      <workItem from="1531254999215" duration="400000" />
+      <workItem from="1531255430974" duration="110000" />
+      <workItem from="1531255731126" duration="88000" />
+      <workItem from="1531255848745" duration="758000" />
+      <workItem from="1531256796998" duration="189000" />
+      <workItem from="1531297261104" duration="1396000" />
+      <workItem from="1531298693810" duration="724000" />
+      <workItem from="1531299618411" duration="25000" />
+      <workItem from="1535658570752" duration="33000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3684000" />
+    <option name="totallyTimeSpent" value="8561000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="0" width="1368" height="738" extended-state="6" />
+    <frame x="0" y="27" width="1366" height="741" extended-state="6" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24963397" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info active="true" anchor="bottom" id="Messages" order="7" visible="true" weight="0.32911393" />
       <window_info anchor="bottom" id="CMake" order="7" weight="0.32753164" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32911393" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32861635" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.32861635" />
       <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -203,6 +195,119 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/EMCal_MT.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="42" column="4" selection-start-line="42" selection-start-column="4" selection-end-line="42" selection-end-column="4" />
+          <folding>
+            <element signature="e#458#483#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/EMCal_MT.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="42" column="4" lean-forward="true" selection-start-line="42" selection-start-column="4" selection-end-line="42" selection-end-column="4" />
+          <folding>
+            <element signature="e#458#483#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/EMCal_MT.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
+          <folding>
+            <element signature="e#458#483#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/EMCal_MT.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
+          <folding>
+            <element signature="e#458#483#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/EMCal_MT.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/EMCal_MT.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/EMCal_MT.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/EMCal_MT.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/EMCal_MT.cc">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/EMCal_MT.cc">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/EMCal_MT.cc">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup.sh">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/EMCal_MT.cc">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup.sh">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/EMCal_MT.cc">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="77" lean-forward="true" selection-start-line="8" selection-start-column="77" selection-end-line="8" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="77" lean-forward="true" selection-start-line="8" selection-start-column="77" selection-end-line="8" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="77" lean-forward="true" selection-start-line="8" selection-start-column="77" selection-end-line="8" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/EMCal_MT.cc">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -239,16 +344,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/DetectorConstruction.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-810" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
-          <caret line="8" column="77" lean-forward="true" selection-start-line="8" selection-start-column="77" selection-end-line="8" selection-end-column="77" />
+          <caret line="8" column="77" selection-start-line="8" selection-start-column="77" selection-end-line="8" selection-end-column="77" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/setup.sh">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Run.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-79" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SteppingAction.cc">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/EMCal_MT.cc">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1170" />
+        <state relative-caret-position="606">
+          <caret line="42" column="4" selection-start-line="42" selection-start-column="4" selection-end-line="42" selection-end-column="4" />
+          <folding>
+            <element signature="e#458#483#0" expanded="true" />
+          </folding>
+        </state>
       </provider>
     </entry>
   </component>

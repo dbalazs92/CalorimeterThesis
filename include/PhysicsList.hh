@@ -72,7 +72,8 @@ public:
           void ConstructOp();
             
   void AddPhysicsList(const G4String& name);
-  void SetVerbose(G4int);
+  
+  void AddStepMax();    
   
   virtual void SetCuts();
 

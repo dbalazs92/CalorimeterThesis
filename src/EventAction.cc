@@ -42,7 +42,8 @@ void EventAction::BeginOfEventAction(const G4Event*)
 
 void EventAction::EndOfEventAction(const G4Event*)
 {
-
+	//Run* run = static_cast<Run*>(G4RunManager::GetRunManager()->GetNonConstCurrentRun());
+	//G4cout << "ABCDEF End of event"<<G4endl;
 }
 
 /// End of file

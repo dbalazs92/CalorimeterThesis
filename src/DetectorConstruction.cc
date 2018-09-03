@@ -65,7 +65,6 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
   G4double world_sizeXY = 1.2*m, world_sizeZ  = 1.2*m;
   G4Box* solidWorld = new G4Box("World", world_sizeXY, world_sizeXY, world_sizeZ);
-    //G4Tubs* fiberFull 	 = new G4Tubs("Fiber", 0*cm, r, (tank_sizeZ+0.1*cm), 0*deg, 360*deg);
 
   G4Material* world_mat = nist->FindOrBuildMaterial("G4_Galactic");
 
@@ -91,7 +90,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     G4ThreeVector posTank = G4ThreeVector(0, 0*cm, pos*cm);
 
     G4Box* solidTank = new G4Box("Tank", (fFiber)*(tank_sizeXY/2), (fFiber)*(tank_sizeXY/2), tank_sizeZ);
-    //G4SubtractionSolid* subTank = new G4SubtractionSolid("Tank", solidTank, fiberFull, 0, G4ThreeVector(0,0,0));
+    //G4Tubs* solidTank = new G4Tubs("Tank", 0*cm, 18*cm, tank_sizeZ, 0*deg, 360*deg);
 
     G4Material* tank_mat = nist->FindOrBuildMaterial("G4_W");
 
@@ -132,9 +131,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   pmma->AddElement(H, 53.33*perCent);
   pmma->AddElement(O, 13.33*perCent);
 
-  G4Material* polyStyrene = new G4Material("Polystyrene", density_ps = 1.05*g/cm3, nelements=2);
-  polyStyrene->AddElement(C, 50.00*perCent);
-  polyStyrene->AddElement(H, 50.00*perCent);
+  G4Material* polyStyrene = nist->FindOrBuildMaterial("G4_POLYSTYRENE");
 
   G4LogicalVolume* fiberInteriorLog = new G4LogicalVolume(fiberInterior, polyStyrene, "fiberInterior");
   G4LogicalVolume* fiberCoverLog = new G4LogicalVolume(fiberCover, pmma, "fiberCover");
@@ -147,8 +144,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   G4VPhysicalVolume* fiberCover_phys;
   G4VPhysicalVolume* fiberInterior_phys;
   G4VPhysicalVolume* Tank_phys;
-  Tank_phys=new G4PVPlacement(0, G4ThreeVector(0, 0, pos*cm), logicTank, "Tank", logicWorld, false, 0, checkOverlaps);
-    for(int i=0;i<fFiber;i++)
+  Tank_phys=new G4PVPlacement(0, posTank, logicTank, "Tank", logicWorld, false, 0, checkOverlaps);
+   for(int i=0;i<fFiber;i++)
     {
         for(int j=0;j<fFiber;j++)
         {
@@ -164,7 +161,6 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
         
         }
     }
-
 /**
   * ... Detector ...
   *
@@ -190,240 +186,87 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   G4Colour detColour( 1.0, 1.0, 1.0, 1.0 );
   G4VisAttributes* detVisAtt = new G4VisAttributes(detColour);
   logicDetec->SetVisAttributes(detVisAtt);
-  
-  
 
   G4VPhysicalVolume* Detector_phys = new G4PVPlacement(0,posDetec, logicDetec, "Detector", logicWorld, false, 0, checkOverlaps);
+  
+  /// optical database
+  
+  G4double photonEnergy[] = { 2.00*eV, 2.44*eV, 2.88*eV, 3.31*eV, 3.75*eV, 4.19*eV, 4.63*eV, 5.06*eV };
 
-/// @brief Energy of photons in fiber table
+  const G4int nEntries = sizeof(photonEnergy)/sizeof(G4double);
+  
+  G4double rIps[] = { 1.59, 1.60, 1.61, 1.62, 1.63, 1.64, 1.65, 1.66};
+  G4double refFiberInterior[] = {0.05, 0.55, 0.06, 0.65, 0.07, 0.08, 0.09, 0.1};
+  G4double absPS[]={2.*cm, 2.05*cm, 2.1*cm, 2.15*cm, 2.2*cm, 2.25*cm, 2.3*cm, 2.35*cm};
+  G4double scFastPS[]={0.00, 0.10, 0.14, 0.18, 0.92, 0.98, 1.00, 1.00};
+  G4double effPS[]={1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00};
 
-  G4double photonEnergy[] = { 2.0*eV, 2.158*eV, 2.316*eV, 2.474*eV,
-							   2.632*eV, 2.789*eV, 2.947*eV, 3.105*eV,
-							   3.263*eV, 3.421*eV, 3.579*eV, 3.737*eV,
-							   3.895*eV, 4.053*eV, 4.211*eV, 4.368*eV,
-							   4.526*eV, 4.684*eV, 4.842*eV, 5.0*eV
-							 };
+  G4MaterialPropertiesTable* mptPS = new G4MaterialPropertiesTable();
+  mptPS->AddProperty("RINDEX", photonEnergy, rIps, nEntries);
+  mptPS->AddProperty("REFLECTIVITY", photonEnergy, refFiberInterior, nEntries);
+  mptPS->AddProperty("EFFICIENCY",photonEnergy,effPS,nEntries);
+  mptPS->AddProperty("ABSLENGTH",photonEnergy,absPS, nEntries);
+  mptPS->AddProperty("FASTCOMPONENT",photonEnergy, scFastPS, nEntries);
+  mptPS->AddConstProperty("SCINTILLATIONYIELD",10./keV);
+  mptPS->AddConstProperty("RESOLUTIONSCALE",1.0);
+  mptPS->AddConstProperty("FASTTIMECONSTANT", 10.*ns);
+  mptPS->AddConstProperty("YIELDRATIO",1.0);
 
-  const G4int nEntries = sizeof(photonEnergy)/sizeof(G4double); /// Number of entries
+  G4cout << "Polystyrene G4MaterialPropertiesTable" << G4endl;
+  mptPS->DumpTable();
 
-/**
- * Fiber's ring optical table
- *
- * @param rIndexFiberRing	Refractive index table of ring
- * @param refFiberRing		Reflectivity table of ring
- * @param absFiberRing		Absorption table of ring
- *
- **/
-
-  G4double rIndexFiberRing[] = { 1.49, 1.4925, 1.495, 1.4975, 1.5, 1.5025, 1.505,
-							  1.5075, 1.51, 1.5125, 1.515, 1.5175, 1.52, 1.5225,
-							  1.525, 1.5275, 1.53, 1.5325, 1.535, 1.5375};
-
-  G4double refFiberRing[] = { 0.04, 0.047, 0.054, 0.061, 0.068, 0.075, 0.082,
-                               0.089, 0.096, 0.103, 0.11, 0.117, 0.124, 0.131,
-                               0.138, 0.145, 0.152, 0.159, 0.166, 0.173};
-
-  G4double absFiberRing[] = {3.448*m,  4.082*m,  6.329*m,  9.174*m, 12.346*m, 13.889*m,
-							 15.152*m, 17.241*m, 18.868*m, 20.000*m, 26.316*m, 35.714*m,
-							 45.455*m, 47.619*m, 52.632*m, 52.632*m, 55.556*m, 52.632*m,
-							 52.632*m, 47.619*m, 45.455*m, 41.667*m, 37.037*m, 33.333*m,
-							 30.000*m, 28.500*m, 27.000*m, 24.500*m, 22.000*m, 19.500*m,
-							 17.500*m, 14.500*m };
-
-/**
- * Fiber's interior optical table
- *
- * @param rIndexFiberInterior	Refractive index table of interior
- * @param refFiberInterior		Reflectivity table of interior
- * @param absFiberInterior		Absorption table of interior
- *
- **/
-
-  G4double rIndexFiberInterior[] = { 1.59, 1.5925, 1.595, 1.5975, 1.6, 1.6025, 1.605,
-                          1.6075, 1.61, 1.6125, 1.615, 1.6175, 1.62, 1.6225,
-                          1.625, 1.6275, 1.63, 1.6325, 1.635, 1.6375};
-
-  G4double refFiberInterior[] = { 0.02, 0.027, 0.034, 0.041, 0.048, 0.055, 0.062,
-                           0.069, 0.076, 0.083, 0.091, 0.097, 0.104, 0.111,
-                           0.118, 0.125, 0.132, 0.139, 0.146, 0.153};
-
-  G4double absFiberInterior[] = {3.448*m,  4.082*m,  6.329*m,  9.174*m, 12.346*m, 13.889*m,
-						 15.152*m, 17.241*m, 18.868*m, 20.000*m, 26.316*m, 35.714*m,
-						 45.455*m, 47.619*m, 52.632*m, 52.632*m, 55.556*m, 52.632*m,
-						 52.632*m, 47.619*m, 45.455*m, 41.667*m, 37.037*m, 33.333*m,
-						 30.000*m, 28.500*m, 27.000*m, 24.500*m, 22.000*m, 19.500*m,
-						 17.500*m, 14.500*m };
-
-/**
- * Detector's optical table
- *
- * @param rIndexDetector 	Refractive index table of detector
- * @param refDetector 		Reflectivity table of detector
- *
- **/
-
-  G4double rIndexDetector[] = { 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00,
-                          1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00,
-                          1.00, 1.00, 1.00, 1.00, 1.00, 1.00};
-
-  G4double refDetector[] = { 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,
-                           0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,
-                           0.00, 0.00, 0.00, 0.00, 0.00, 0.00};
-
-/// @brief Fiber's ring material properties table
+  polyStyrene->SetMaterialPropertiesTable(mptPS);
+  polyStyrene->GetIonisation()->SetBirksConstant(0.126*mm/MeV);
+  
+  G4double rIpmma[] = { 1.49, 1.495, 1.50, 1.505, 1.51, 1.515, 1.52, 1.525};
+  G4double refFiberCover[] = {0.04, 0.45, 0.05, 0.55, 0.06, 0.07, 0.08, 0.09};
 
   G4MaterialPropertiesTable* mptPMMA = new G4MaterialPropertiesTable();
-
-  mptPMMA->AddProperty("RINDEX", photonEnergy, rIndexFiberRing, nEntries);
-  mptPMMA->AddProperty("REFLECTIVITY", photonEnergy, refFiberRing, nEntries);
-  mptPMMA->AddProperty("ABSLENGTH",    photonEnergy, absFiberRing,     nEntries);
+  mptPMMA->AddProperty("RINDEX", photonEnergy, rIpmma, nEntries);
+  mptPMMA->AddProperty("REFLECTIVITY", photonEnergy, refFiberCover, nEntries);
 
   G4cout << "PMMA G4MaterialPropertiesTable" << G4endl;
-
   mptPMMA->DumpTable();
+
   pmma->SetMaterialPropertiesTable(mptPMMA);
-
-/// @brief Fiber's interior material properties table
-
-  G4MaterialPropertiesTable* mptPolyStyrene = new G4MaterialPropertiesTable();
-  mptPolyStyrene->AddProperty("RINDEX", photonEnergy, rIndexFiberInterior, nEntries);
-  mptPolyStyrene->AddProperty("REFLECTIVITY", photonEnergy, refFiberInterior, nEntries);
-  mptPolyStyrene->AddProperty("ABSLENGTH",    photonEnergy, absFiberInterior, nEntries);
-
-  G4cout << "polyStyrene G4MaterialPropertiesTable" << G4endl;
-  mptPolyStyrene->DumpTable();
-  polyStyrene->SetMaterialPropertiesTable(mptPolyStyrene);
-
-/// @brief Detector's material properties table
-
-  G4MaterialPropertiesTable* mptDetector = new G4MaterialPropertiesTable();
-  mptDetector->AddProperty("RINDEX", photonEnergy, rIndexDetector, nEntries);
-  mptDetector->AddProperty("REFLECTIVITY", photonEnergy, refDetector, nEntries);
-
-  G4cout << "Detector G4MaterialPropertiesTable" << G4endl;
-  mptDetector->DumpTable();
-
-  detec_mat->SetMaterialPropertiesTable(mptDetector);
-
-/// @brief Fiber's surface optical definition
-
-  G4OpticalSurface*  fiberInterior_fiberCoverSurface = new G4OpticalSurface("fiberInterior_fiberCoverOpticalSurface");
-  fiberInterior_fiberCoverSurface->SetType(dielectric_dielectric);
-  fiberInterior_fiberCoverSurface->SetFinish(polished);
-  fiberInterior_fiberCoverSurface->SetModel(unified);
   
-  new G4LogicalBorderSurface("fiberInterior_fiberCoverSurface", fiberInterior_phys,fiberCover_phys,fiberInterior_fiberCoverSurface);
+  G4double rImirror[] = { 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00};
+  G4double refMirror[] = {0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00};
 
-  G4OpticalSurface*  fiberCover_TankSurface = new G4OpticalSurface("fiberCover_TankOpticalSurface");
-  fiberCover_TankSurface->SetType(dielectric_dielectric);
-  fiberCover_TankSurface->SetFinish(polishedbackpainted);
-  fiberCover_TankSurface->SetModel(unified);
+  G4MaterialPropertiesTable* mptmirror = new G4MaterialPropertiesTable();
+  mptmirror->AddProperty("RINDEX", photonEnergy, rImirror, nEntries);
+  mptmirror->AddProperty("REFLECTIVITY", photonEnergy, refMirror, nEntries);
+
+  G4cout << "mirror G4MaterialPropertiesTable" << G4endl;
+  mptmirror->DumpTable();
+
+  detec_mat->SetMaterialPropertiesTable(mptmirror);
   
-  new G4LogicalBorderSurface("fiberCover_TankSurface", fiberCover_phys,Tank_phys,fiberCover_TankSurface);
+  ///Surfaces
   
-  G4OpticalSurface*  Tank_DetectorSurface = new G4OpticalSurface("Tank_DetectorOpticalSurface");
-  Tank_DetectorSurface->SetType(dielectric_metal);
-  Tank_DetectorSurface->SetFinish(ground);
-  Tank_DetectorSurface->SetModel(unified);
-  
-  new G4LogicalBorderSurface("Tank_DetectorSurface", Tank_phys,Detector_phys,Tank_DetectorSurface);
-  
-  G4OpticalSurface*  fiberInterior_DetectorSurface = new G4OpticalSurface("fiberInterior_DetectorSurface");
-  fiberInterior_DetectorSurface->SetType(dielectric_metal);
-  fiberInterior_DetectorSurface->SetFinish(ground);
-  fiberInterior_DetectorSurface->SetModel(unified);
-  
-  new G4LogicalBorderSurface("fiberInterior_DetectorSurface", fiberInterior_phys,Detector_phys,fiberInterior_DetectorSurface);
+  G4OpticalSurface*  fiberInteriorSurface = new G4OpticalSurface("fiberInteriorOpticalSurface");
+  fiberInteriorSurface->SetType(dielectric_dielectric);
+  fiberInteriorSurface->SetFinish(polished);
+  fiberInteriorSurface->SetModel(glisur);
+  new G4LogicalSkinSurface("fiberInteriorSurface", fiberInteriorLog, fiberInteriorSurface);
 
-/// @brief Fiber scintillationing
+  G4OpticalSurface*  fiberCoverSurface = new G4OpticalSurface("fiberCoverOpticalSurface");
+  fiberCoverSurface->SetType(dielectric_dielectric);
+  fiberCoverSurface->SetFinish(polishedbackpainted);
+  fiberCoverSurface->SetModel(unified);
+  new G4LogicalSkinSurface("fiberCoverSurface", fiberCoverLog, fiberCoverSurface);
 
-  G4double scintilFast[] =
-            { 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00,
-              1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00,
-              1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00,
-              1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00,
-              1.00, 1.00, 1.00, 1.00 };
+  G4OpticalSurface*  TankSurface = new G4OpticalSurface("TankOpticalSurface");
+  TankSurface->SetType(dielectric_metal);
+  TankSurface->SetFinish(ground);
+  TankSurface->SetModel(unified);
+  new G4LogicalSkinSurface("TankSurface", logicTank, TankSurface);
 
-
-
-  G4double scintilSlow[] =
-            { 0.01, 1.00, 2.00, 3.00, 4.00, 5.00, 6.00,
-              7.00, 8.00, 9.00, 8.00, 7.00, 6.00, 4.00,
-              3.00, 2.00, 1.00, 0.01, 1.00, 2.00, 3.00,
-              4.00, 5.00, 6.00, 7.00, 8.00, 9.00, 8.00,
-              7.00, 6.00, 5.00, 4.00 };
-
-
-
-  mptPolyStyrene->AddProperty("FASTCOMPONENT",photonEnergy, scintilFast,     nEntries)
-        ->SetSpline(true);
-  mptPolyStyrene->AddProperty("SLOWCOMPONENT",photonEnergy, scintilSlow,     nEntries)
-        ->SetSpline(true);
-
-  mptPolyStyrene->AddConstProperty("SCINTILLATIONYIELD",50./MeV);
-  mptPolyStyrene->AddConstProperty("RESOLUTIONSCALE",1.0);
-  mptPolyStyrene->AddConstProperty("FASTTIMECONSTANT", 1.*ns);
-  mptPolyStyrene->AddConstProperty("SLOWTIMECONSTANT",10.*ns);
-  mptPolyStyrene->AddConstProperty("YIELDRATIO",0.8);
-
-  G4double energy_ps[] = {
-     1.56962*eV, 1.58974*eV, 1.61039*eV, 1.63157*eV,
-     1.65333*eV, 1.67567*eV, 1.69863*eV, 1.72222*eV,
-     1.74647*eV, 1.77142*eV, 1.7971 *eV, 1.82352*eV,
-     1.85074*eV, 1.87878*eV, 1.90769*eV, 1.93749*eV,
-     1.96825*eV, 1.99999*eV, 2.03278*eV, 2.06666*eV,
-     2.10169*eV, 2.13793*eV, 2.17543*eV, 2.21428*eV,
-     2.25454*eV, 2.29629*eV, 2.33962*eV, 2.38461*eV,
-     2.43137*eV, 2.47999*eV, 2.53061*eV, 2.58333*eV,
-     2.63829*eV, 2.69565*eV, 2.75555*eV, 2.81817*eV,
-     2.88371*eV, 2.95237*eV, 3.02438*eV, 3.09999*eV,
-     3.17948*eV, 3.26315*eV, 3.35134*eV, 3.44444*eV,
-     3.54285*eV, 3.64705*eV, 3.75757*eV, 3.87499*eV,
-     3.99999*eV, 4.13332*eV, 4.27585*eV, 4.42856*eV,
-     4.59258*eV, 4.76922*eV, 4.95999*eV, 5.16665*eV,
-     5.39129*eV, 5.63635*eV, 5.90475*eV, 6.19998*eV
-  };
-
-  const G4int numentries_ps = sizeof(energy_ps)/sizeof(G4double);
-
-  ///assume 100 times larger than the rayleigh scattering for now.
-
-  G4double mie_ps[] = {
-     167024.4*m, 158726.7*m, 150742.0*m,
-     143062.5*m, 135680.2*m, 128587.4*m,
-     121776.3*m, 115239.5*m, 108969.5*m,
-     102958.8*m, 97200.35*m, 91686.86*m,
-     86411.33*m, 81366.79*m, 76546.42*m,
-     71943.46*m, 67551.29*m, 63363.36*m,
-     59373.25*m, 55574.61*m, 51961.24*m,
-     48527.00*m, 45265.87*m, 42171.94*m,
-     39239.39*m, 36462.50*m, 33835.68*m,
-     31353.41*m, 29010.30*m, 26801.03*m,
-     24720.42*m, 22763.36*m, 20924.88*m,
-     19200.07*m, 17584.16*m, 16072.45*m,
-     14660.38*m, 13343.46*m, 12117.33*m,
-     10977.70*m, 9920.416*m, 8941.407*m,
-     8036.711*m, 7202.470*m, 6434.927*m,
-     5730.429*m, 5085.425*m, 4496.467*m,
-     3960.210*m, 3473.413*m, 3032.937*m,
-     2635.746*m, 2278.907*m, 1959.588*m,
-     1675.064*m, 1422.710*m, 1200.004*m,
-     1004.528*m, 833.9666*m, 686.1063*m
-  };
-
-  assert(sizeof(mie_ps) == sizeof(energy_ps));
-
-  /// gforward, gbackward, forward backward ratio
-  G4double mie_ps_const[3]={0.99,0.99,0.8};
-
-  mptPolyStyrene->AddProperty("MIEHG",energy_ps,mie_ps,numentries_ps)
-        ->SetSpline(true);
-  mptPolyStyrene->AddConstProperty("MIEHG_FORWARD",mie_ps_const[0]);
-  mptPolyStyrene->AddConstProperty("MIEHG_BACKWARD",mie_ps_const[1]);
-  mptPolyStyrene->AddConstProperty("MIEHG_FORWARD_RATIO",mie_ps_const[2]);
-
-    polyStyrene->GetIonisation()->SetBirksConstant(0.126*mm/MeV);
-
+  G4OpticalSurface*  MirrorSurface = new G4OpticalSurface("MirrorSurface");
+  MirrorSurface->SetType(dielectric_metal);
+  MirrorSurface->SetFinish(ground);
+  MirrorSurface->SetModel(unified);
+  new G4LogicalSkinSurface("MirrorSurface", logicDetec, MirrorSurface);
 
   return physWorld;
 

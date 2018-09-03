@@ -52,8 +52,10 @@
 #include "G4UnitsTable.hh"
 #include "G4SystemOfUnits.hh"
 
+#include "StepMax.hh"
+
 G4ThreadLocal G4int PhysicsList::fVerboseLevel = 1;
-G4ThreadLocal G4int PhysicsList::fMaxNumPhotonStep = 40;
+G4ThreadLocal G4int PhysicsList::fMaxNumPhotonStep = 30;
 G4ThreadLocal G4Cerenkov* PhysicsList::fCerenkovProcess = 0;
 G4ThreadLocal G4Scintillation* PhysicsList::fScintillationProcess = 0;
 G4ThreadLocal G4OpAbsorption* PhysicsList::fAbsorptionProcess = 0;
@@ -211,6 +213,7 @@ void PhysicsList::ConstructProcess()
     emOptions.SetStepFunction(0.2, 100*um);
     
     SetCuts();
+    AddStepMax();
     
     fParticleList->ConstructProcess();
     for(size_t i=0; i<fHadronPhys.size(); i++) {
@@ -440,19 +443,6 @@ void PhysicsList::ConstructOp()
     }
   }
 }
-/// @brief Setting Verbose
-
-void PhysicsList::SetVerbose(G4int verbose)
-{
-  fVerboseLevel = verbose;
-
-  fCerenkovProcess->SetVerboseLevel(fVerboseLevel);
-  fScintillationProcess->SetVerboseLevel(fVerboseLevel);
-  fAbsorptionProcess->SetVerboseLevel(fVerboseLevel);
-  fRayleighScatteringProcess->SetVerboseLevel(fVerboseLevel);
-  fMieHGScatteringProcess->SetVerboseLevel(fVerboseLevel);
-  fBoundaryProcess->SetVerboseLevel(fVerboseLevel);
-}
 
 /// @brief Hadronic build list #0
 
@@ -499,7 +489,6 @@ void PhysicsList::SetBuilderList2()
 
 void PhysicsList::SetCuts()
 {
-
   if (verboseLevel >0)
   {
     G4cout << "PhysicsList::SetCuts:";
@@ -512,6 +501,24 @@ void PhysicsList::SetCuts()
   SetCutValue(fCutForProton, "proton");
 
   if (verboseLevel>0) { DumpCutValuesTable(); }
+}
+///StepMax
+void PhysicsList::AddStepMax()
+{
+  // Step limitation seen as a process
+  StepMax* stepMaxProcess = new StepMax();
+
+  auto particleIterator=GetParticleIterator();
+  particleIterator->reset();
+  while ((*particleIterator)()){
+      G4ParticleDefinition* particle = particleIterator->value();
+      G4ProcessManager* pmanager = particle->GetProcessManager();
+
+      if (stepMaxProcess->IsApplicable(*particle))
+        {
+          pmanager ->AddDiscreteProcess(stepMaxProcess);
+        }
+  }
 }
 
 
