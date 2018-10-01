@@ -28,9 +28,11 @@ class EventAction : public G4UserEventAction
     virtual void BeginOfEventAction(const G4Event* event);
     virtual void EndOfEventAction(const G4Event* event);
     void SetTempID(G4int k){tempID=k;}
+    void SetHitNumber(){detectorHit++;}
     G4int GetTempID(){return tempID;}
   private:
     G4int tempID;
+    G4int detectorHit;
 };
 
 #endif

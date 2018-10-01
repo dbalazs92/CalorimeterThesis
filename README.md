@@ -76,7 +76,7 @@ After build, in the directory of program (EMCal_MT), open a terminal window and 
 
 ## Updates
 
-* 2018/03/23 - 'v2.2' - Added macroROOT.cc 
+* 2018/03/23 - 'v4.0' - Major modifications
 
 * 2018/03/13 - 'v2.1' - Implementation of Box–Muller transform in PGA
 

@@ -14,7 +14,7 @@
 /// @brief Constructor of Event action
 
 EventAction::EventAction()
-: G4UserEventAction(), tempID(0)
+: G4UserEventAction(), tempID(0), detectorHit(0)
 {}
 
 /// @brief Destructor of Event action
@@ -43,7 +43,7 @@ void EventAction::BeginOfEventAction(const G4Event*)
 void EventAction::EndOfEventAction(const G4Event*)
 {
 	//Run* run = static_cast<Run*>(G4RunManager::GetRunManager()->GetNonConstCurrentRun());
-	//G4cout << "ABCDEF End of event"<<G4endl;
+	G4cout << "CalHits: "<<detectorHit<<G4endl;
 }
 
 /// End of file

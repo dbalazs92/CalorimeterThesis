@@ -48,6 +48,8 @@ set(EXAMPLEEMCal_MT_SCRIPTS
   run.png
   gui.mac
   vis.mac
+  runs.sh
+  Macro.cc
   )
 
 foreach(_script ${EXAMPLEEMCal_MT_SCRIPTS})

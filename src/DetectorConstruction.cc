@@ -41,7 +41,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   G4double a, z, density_pmma, density_ps, pos=18, r = (0.47/2)*mm; /// Useable constants and variables (radius, density and etc.)
   G4int nelements;
 
-  G4double tank_sizeXY = 0.87*mm, tank_sizeZ = 12.6*cm; /// Size of Tank
+  G4double tank_sizeXY = 1.0*mm, tank_sizeZ = 12.6*cm; /// Size of Tank, before: 0.87
 
   G4NistManager* nist = G4NistManager::Instance(); /// Get nist material manager
 
@@ -145,7 +145,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   G4VPhysicalVolume* fiberInterior_phys;
   G4VPhysicalVolume* Tank_phys;
   Tank_phys=new G4PVPlacement(0, posTank, logicTank, "Tank", logicWorld, false, 0, checkOverlaps);
-   for(int i=0;i<fFiber;i++)
+  for(int i=0;i<fFiber;i++)
     {
         for(int j=0;j<fFiber;j++)
         {
@@ -207,9 +207,10 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   mptPS->AddProperty("EFFICIENCY",photonEnergy,effPS,nEntries);
   mptPS->AddProperty("ABSLENGTH",photonEnergy,absPS, nEntries);
   mptPS->AddProperty("FASTCOMPONENT",photonEnergy, scFastPS, nEntries);
-  mptPS->AddConstProperty("SCINTILLATIONYIELD",10./keV);
+  mptPS->AddConstProperty("SCINTILLATIONYIELD",12./keV);
   mptPS->AddConstProperty("RESOLUTIONSCALE",1.0);
-  mptPS->AddConstProperty("FASTTIMECONSTANT", 10.*ns);
+  mptPS->AddConstProperty("SLOWTIMECONSTANT", 30.*ns);
+  mptPS->AddConstProperty("FASTTIMECONSTANT", 1.0*ns);
   mptPS->AddConstProperty("YIELDRATIO",1.0);
 
   G4cout << "Polystyrene G4MaterialPropertiesTable" << G4endl;
