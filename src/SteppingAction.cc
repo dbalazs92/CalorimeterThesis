@@ -74,26 +74,11 @@ void SteppingAction::UserSteppingAction(const G4Step* fStep)
         fTrack->SetTrackStatus(fStopAndKill);
       }
 	if((edepStep!=0)||(postName == "Detector")){
-      if(fLite==false)
-		{
 	G4cout << "CalDat " << particleName << " " << procN << " " << trackID << " " << edepStep / MeV << " "
              << postkinE / eV << " " << preX / cm << " " << preY / cm << " " << preZ / cm
              << " " << postX / cm << " " << postY / cm << " " << postZ / cm << " " << preName << " " << postName << " "
              << postTime / ns << G4endl;
 		}
-		else
-		{
-	G4cout << "CalDat " << particleName << " " << procN << " " << edepStep / MeV << " "
-             << preX / cm << " " << preY / cm << " " << preZ / cm
-             << " " << postX / cm << " " << postY / cm << " " << postZ / cm << " " << preName << " " << postName
-			<< G4endl;
-		}}
-      //fEventAction->SetTempID(trackID);
-      if (postName == "Detector"){
-		   G4cout << "CalHit" << postX / cm << " " << postY / cm << " " << postZ / cm <<G4endl;
-		   fEventAction->SetHitNumber();
-		   fTrack->SetTrackStatus(fStopAndKill); 
-		   }
     }
 
 }

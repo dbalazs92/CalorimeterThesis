@@ -42,12 +42,12 @@ void Macro(Double_t fiber, const char ads[], const char adsX[], const char adsY[
 	
 	auto f = TFile::Open(ads,"RECREATE");
 	
-	ifstream in1("data.txt");
+	ifstream in1("dataW.txt");
 	
 	TTree *tree = new TTree("T","Data from text file");
-	TCanvas  * cX = new TCanvas("Canvas","Results",1920,1080);
+	TCanvas  * cX = new TCanvas("Canvas","Results",1024,768);
 	auto h0 = new TH1D("TH1D0", "Energy deposit by distance", osztas, minZ, maxZ);
-	auto h1 = new TH2D("TH2D1", "Lateral", osztas*10, -l, l, osztas*10, -l, l);
+	auto h1 = new TH2D("TH2D1", "Lateral", osztas*5, -l, l, osztas*5, -l, l);
 	auto h2 = new TH2D("TH2D2", "Detector Hits", osztas*5, -l, l, osztas*5, -l, l);
 	
 	tree->Branch("particleName",&particleName);

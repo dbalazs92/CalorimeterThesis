@@ -73,7 +73,7 @@ G4ThreadLocal G4OpBoundaryProcess* PhysicsList::fBoundaryProcess = 0;
 PhysicsList::PhysicsList(G4String inPhysList, G4int fCut)
  : G4VModularPhysicsList(),fEmPhysicsList(0),fDecay(0)
 {
-  fCutForParticle=1000;
+  fCutForParticle=2000;
 
   scut=fCut;
 
@@ -200,7 +200,7 @@ void PhysicsList::ConstructProcess()
 
     G4LossTableManager::Instance()->SetAtomDeexcitation(de);
     G4ProductionCutsTable::GetProductionCutsTable()->SetEnergyRange(lowEnergyEnd, 1*GeV);
-
+/*
     G4EmProcessOptions emOptions;
 
     emOptions.SetMinEnergy(100*eV);
@@ -211,7 +211,7 @@ void PhysicsList::ConstructProcess()
 
     emOptions.SetMscStepLimitation(fUseSafety);
     emOptions.SetStepFunction(0.2, 100*um);
-    
+  */  
     SetCuts();
     AddStepMax();
     

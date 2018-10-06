@@ -195,23 +195,17 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
   const G4int nEntries = sizeof(photonEnergy)/sizeof(G4double);
   
-  G4double rIps[] = { 1.59, 1.60, 1.61, 1.62, 1.63, 1.64, 1.65, 1.66};
-  G4double refFiberInterior[] = {0.05, 0.55, 0.06, 0.65, 0.07, 0.08, 0.09, 0.1};
-  G4double absPS[]={2.*cm, 2.05*cm, 2.1*cm, 2.15*cm, 2.2*cm, 2.25*cm, 2.3*cm, 2.35*cm};
-  G4double scFastPS[]={0.00, 0.10, 0.14, 0.18, 0.92, 0.98, 1.00, 1.00};
-  G4double effPS[]={1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00};
+  G4double rIps[] = { 1.50, 1.50, 1.50, 1.50, 1.50, 1.50, 1.50, 1.50};
+  G4double absPS[]={2.*cm,2.*cm,2.*cm,2.*cm,2.*cm,2.*cm,2.*cm,2.*cm};
+  G4double scFastPS[]={0.00, 0.00, 0.00, 0.00, 0.00, 1.00, 1.00, 1.00};
 
   G4MaterialPropertiesTable* mptPS = new G4MaterialPropertiesTable();
   mptPS->AddProperty("RINDEX", photonEnergy, rIps, nEntries);
-  mptPS->AddProperty("REFLECTIVITY", photonEnergy, refFiberInterior, nEntries);
-  mptPS->AddProperty("EFFICIENCY",photonEnergy,effPS,nEntries);
   mptPS->AddProperty("ABSLENGTH",photonEnergy,absPS, nEntries);
   mptPS->AddProperty("FASTCOMPONENT",photonEnergy, scFastPS, nEntries);
-  mptPS->AddConstProperty("SCINTILLATIONYIELD",12./keV);
+  mptPS->AddConstProperty("SCINTILLATIONYIELD",10./keV);
   mptPS->AddConstProperty("RESOLUTIONSCALE",1.0);
-  mptPS->AddConstProperty("SLOWTIMECONSTANT", 30.*ns);
-  mptPS->AddConstProperty("FASTTIMECONSTANT", 1.0*ns);
-  mptPS->AddConstProperty("YIELDRATIO",1.0);
+  mptPS->AddConstProperty("FASTTIMECONSTANT", 10.*ns);
 
   G4cout << "Polystyrene G4MaterialPropertiesTable" << G4endl;
   mptPS->DumpTable();
@@ -219,12 +213,10 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   polyStyrene->SetMaterialPropertiesTable(mptPS);
   polyStyrene->GetIonisation()->SetBirksConstant(0.126*mm/MeV);
   
-  G4double rIpmma[] = { 1.49, 1.495, 1.50, 1.505, 1.51, 1.515, 1.52, 1.525};
-  G4double refFiberCover[] = {0.04, 0.45, 0.05, 0.55, 0.06, 0.07, 0.08, 0.09};
+  G4double rIpmma[] = { 1.60, 1.60, 1.60, 1.60, 1.60, 1.60, 1.60, 1.60};
 
   G4MaterialPropertiesTable* mptPMMA = new G4MaterialPropertiesTable();
   mptPMMA->AddProperty("RINDEX", photonEnergy, rIpmma, nEntries);
-  mptPMMA->AddProperty("REFLECTIVITY", photonEnergy, refFiberCover, nEntries);
 
   G4cout << "PMMA G4MaterialPropertiesTable" << G4endl;
   mptPMMA->DumpTable();
