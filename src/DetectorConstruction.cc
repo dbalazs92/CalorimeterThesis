@@ -21,7 +21,7 @@
 /// @brief Constructor of Detector construction
 
 DetectorConstruction::DetectorConstruction(G4int fiber)
-: G4VUserDetectorConstruction(), fFiber(fiber)
+: G4VUserDetectorConstruction(), fFiber(fiber), fCalSim(true)
 {}
 
 /// @brief Destructor of Detector construction
@@ -145,7 +145,10 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   G4VPhysicalVolume* fiberInterior_phys;
   G4VPhysicalVolume* Tank_phys;
   Tank_phys=new G4PVPlacement(0, posTank, logicTank, "Tank", logicWorld, false, 0, checkOverlaps);
-  for(int i=0;i<fFiber;i++)
+	
+	if(fCalSim==true)
+	{
+	for(int i=0;i<fFiber;i++)
     {
         for(int j=0;j<fFiber;j++)
         {
@@ -161,6 +164,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
         
         }
     }
+	}
 /**
   * ... Detector ...
   *

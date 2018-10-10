@@ -42,7 +42,7 @@ void Macro(Double_t fiber, const char ads[], const char adsX[], const char adsY[
 	
 	auto f = TFile::Open(ads,"RECREATE");
 	
-	ifstream in1("dataW.txt");
+	ifstream in1("data.txt");
 	
 	TTree *tree = new TTree("T","Data from text file");
 	TCanvas  * cX = new TCanvas("Canvas","Results",1024,768);
