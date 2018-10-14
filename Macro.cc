@@ -27,7 +27,7 @@
 
 using namespace std;
 
-void Macro(Double_t fiber, const char ads[], const char adsX[], const char adsY[],const char adsZ[]){
+void Macro(Double_t fiber, const char ads[], const char adsX[], const char adsY[]){
 	
 	gStyle->SetOptStat(0);
 	
@@ -39,16 +39,16 @@ void Macro(Double_t fiber, const char ads[], const char adsX[], const char adsY[
 	Int_t osztas=30;
 	Double_t minZ=0.0,maxZ=10.512;
 	Double_t l=(0.1*(fiber+1))/2;
+	Int_t counter=0;
 	
 	auto f = TFile::Open(ads,"RECREATE");
 	
-	ifstream in1("data.txt");
+	ifstream in1("data1.txt");
 	
 	TTree *tree = new TTree("T","Data from text file");
 	TCanvas  * cX = new TCanvas("Canvas","Results",1024,768);
 	auto h0 = new TH1D("TH1D0", "Energy deposit by distance", osztas, minZ, maxZ);
 	auto h1 = new TH2D("TH2D1", "Lateral", osztas*5, -l, l, osztas*5, -l, l);
-	auto h2 = new TH2D("TH2D2", "Detector Hits", osztas*5, -l, l, osztas*5, -l, l);
 	
 	tree->Branch("particleName",&particleName);
 	tree->Branch("processName",&procN);
@@ -71,7 +71,7 @@ void Macro(Double_t fiber, const char ads[], const char adsX[], const char adsY[
 		h1->Fill(postX, postY, edep);
 		if(postName=="Detector")
 		{
-			h2->Fill(postX, postY, edep);
+			counter++;
 		}
 		tree->Fill();
 	}
@@ -96,13 +96,10 @@ void Macro(Double_t fiber, const char ads[], const char adsX[], const char adsY[
 	img->FromPad(cX);
 	img->WriteImage(adsX);
 	h1->Draw("colz");
+	TLatex t(-l-0.1,l+0.1,Form("Dp: %d",counter));
+    t.Draw();
 	cX->Update();
 	TImage *img2 = TImage::Create();
 	img2->FromPad(cX);
 	img2->WriteImage(adsY);
-	h2->Draw("scat");
-	cX->Update();
-	TImage *img3 = TImage::Create();
-	img3->FromPad(cX);
-	img3->WriteImage(adsZ);
 }
