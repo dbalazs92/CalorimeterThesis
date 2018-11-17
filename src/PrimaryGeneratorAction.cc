@@ -31,7 +31,7 @@
 
 PrimaryGeneratorAction::PrimaryGeneratorAction(G4double E0, G4String Particle, G4int Fiber)
 : G4VUserPrimaryGeneratorAction(),
-  fParticleGun(0),fParticle(Particle),fEnergy(E0), fFiber(Fiber), fBoxMuller(false)
+  fParticleGun(0),fParticle(Particle),fEnergy(E0), fFiber(Fiber), fBoxMuller(true)
 {
   G4int n_particle = 1;   ///particles per event
   fParticleGun  = new G4ParticleGun(n_particle);

@@ -33,7 +33,9 @@ void SteppingAction::UserSteppingAction(const G4Step* fStep)
   G4double edepStep = fStep->GetTotalEnergyDeposit();
   G4Track * fTrack = fStep->GetTrack();
   G4int trackID=fTrack->GetTrackID();
-  G4int tID=fEventAction->GetTempID();
+  G4int eID = 0;
+  const G4Event* evt = G4RunManager::GetRunManager()->GetCurrentEvent();
+  if(evt) eID = evt->GetEventID();
 
   //G4double preTime = fStep->GetPreStepPoint()->GetLocalTime();
   G4double postTime = fStep->GetPostStepPoint()->GetLocalTime();
@@ -75,7 +77,7 @@ void SteppingAction::UserSteppingAction(const G4Step* fStep)
       }
 	if((edepStep!=0)||(postName == "Detector")){
 	G4cout << "CalDat " << particleName << " " << procN << " " << trackID << " " << edepStep / MeV << " "
-             << postkinE / eV << " " << preX / cm << " " << preY / cm << " " << preZ / cm
+             << eID << " " << preX / cm << " " << preY / cm << " " << preZ / cm
              << " " << postX / cm << " " << postY / cm << " " << postZ / cm << " " << preName << " " << postName << " "
              << postTime / ns << G4endl;
 		}

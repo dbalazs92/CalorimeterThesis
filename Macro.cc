@@ -30,11 +30,12 @@ using namespace std;
 void Macro(Double_t fiber, const char ads[], const char adsX[], const char adsY[]){
 	
 	gStyle->SetOptStat(0);
+	gStyle->SetOptTitle(0);
 	
 	string name1,name2, particleName, procN, preName, postName;
 	char jel;
-	Double_t prekinE, postkinE, preX, preY, preZ, postX, postY, postZ, postTime, edep;
-	Int_t trackID;
+	Double_t prekinE, preX, preY, preZ, postX, postY, postZ, postTime, edep;
+	Int_t trackID,eID;
 	
 	Int_t osztas=30;
 	Double_t minZ=0.0,maxZ=10.512;
@@ -43,7 +44,7 @@ void Macro(Double_t fiber, const char ads[], const char adsX[], const char adsY[
 	
 	auto f = TFile::Open(ads,"RECREATE");
 	
-	ifstream in1("data1.txt");
+	ifstream in1("data.txt");
 	
 	TTree *tree = new TTree("T","Data from text file");
 	TCanvas  * cX = new TCanvas("Canvas","Results",1024,768);
@@ -53,6 +54,7 @@ void Macro(Double_t fiber, const char ads[], const char adsX[], const char adsY[
 	tree->Branch("particleName",&particleName);
 	tree->Branch("processName",&procN);
 	tree->Branch("trackID",&trackID,"trackID/I");
+	tree->Branch("eID",&eID,"eID/I");
 	tree->Branch("preX",&preX,"preX/D");
 	tree->Branch("preY",&preY,"preY/D");
 	tree->Branch("preZ",&preZ,"preZ/D");
@@ -66,7 +68,7 @@ void Macro(Double_t fiber, const char ads[], const char adsX[], const char adsY[
 	
 	while(!in1.eof())
 	{
-		in1>>name2>>jel>>name1>>particleName>>procN>>trackID>>edep>>postkinE>>preX>>preY>>preZ>>postX>>postY>>postZ>>preName>>postName>>postTime;
+		in1>>name2>>jel>>name1>>particleName>>procN>>trackID>>edep>>eID>>preX>>preY>>preZ>>postX>>postY>>postZ>>preName>>postName>>postTime;
 		h0->Fill(postZ-5.5, edep);
 		h1->Fill(postX, postY, edep);
 		if(postName=="Detector")
@@ -91,7 +93,7 @@ void Macro(Double_t fiber, const char ads[], const char adsX[], const char adsY[
 	gr0->SetMarkerColor(38);
 	gr0->SetLineWidth(3);
 	gr0->Draw("acp");
-	gr0->SetTitle("Energy deposit by distance; Z axis [cm]; Energy deposit [eV]");
+	gr0->SetTitle("Energy deposit by distance; Z axis [cm]; Energy deposit [MeV]");
 	TImage *img = TImage::Create();
 	img->FromPad(cX);
 	img->WriteImage(adsX);
