@@ -1,11 +1,12 @@
 /**
- * @file /EMCal_MT/Macro.cc
+ * @file /ECal_MT/Macro.cc
  * @author Balázs Demeter <balazsdemeter92@gmail.com>
  * @date 2018/03/23 <creation>
  * 
  * @section DESCRIPTION
  * 
- * The Geant4 simulation of EMcal's ROOT macro. Creating .root file from raw datas for analysis. 
+ * The Geant4 simulation of ECal's ROOT macro.
+ * Creating .root file from raw datas and Edep and Lateral histos. 
  * Latest updates of project can be found in README file.
  **/
 
@@ -48,7 +49,7 @@ void Macro(Double_t fiber, const char ads[], const char adsX[], const char adsY[
 	
 	TTree *tree = new TTree("T","Data from text file");
 	TCanvas  * cX = new TCanvas("Canvas","Results",1024,768);
-	auto h0 = new TH1D("TH1D0", "Energy deposit by distance", osztas, minZ, maxZ);
+	auto h0 = new TH1D("TH1D0", "Leadott energia", osztas, minZ, maxZ);
 	auto h1 = new TH2D("TH2D1", "Lateral", osztas*5, -l, l, osztas*5, -l, l);
 	
 	tree->Branch("particleName",&particleName);
@@ -69,7 +70,7 @@ void Macro(Double_t fiber, const char ads[], const char adsX[], const char adsY[
 	while(!in1.eof())
 	{
 		in1>>name2>>jel>>name1>>particleName>>procN>>trackID>>edep>>eID>>preX>>preY>>preZ>>postX>>postY>>postZ>>preName>>postName>>postTime;
-		h0->Fill(postZ-5.5, edep);
+		h0->Fill(postZ-11.5, edep);
 		h1->Fill(postX, postY, edep);
 		if(postName=="Detector")
 		{
@@ -93,12 +94,12 @@ void Macro(Double_t fiber, const char ads[], const char adsX[], const char adsY[
 	gr0->SetMarkerColor(38);
 	gr0->SetLineWidth(3);
 	gr0->Draw("acp");
-	gr0->SetTitle("Energy deposit by distance; Z axis [cm]; Energy deposit [MeV]");
+	gr0->SetTitle("Leadott energia; Z tengely [cm]; Leadott energia [MeV]");
 	TImage *img = TImage::Create();
 	img->FromPad(cX);
 	img->WriteImage(adsX);
 	h1->Draw("colz");
-	TLatex t(-l-0.1,l+0.1,Form("Dp: %d",counter));
+	TLatex t(-l-0.1,l+0.1,Form("Erzekelt foton: %d",counter));
     t.Draw();
 	cX->Update();
 	TImage *img2 = TImage::Create();

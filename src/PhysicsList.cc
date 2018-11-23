@@ -1,11 +1,11 @@
 /**
- * @file /EMCal_MT/src/PhysicsList.cc
+ * @file /ECal_MT/src/PhysicsList.cc
  * @author Balázs Demeter <balazsdemeter92@gmail.com>
  * @date 2017/09/15 <creation>
  * 
  * @section DESCRIPTION
  * 
- * The Geant4 simulation of EMcal's physics list source code for definition of physics.
+ * The Geant4 simulation of ECal's physics list source code for definition of physics.
  * Latest updates of project can be found in README file.
  **/
 
@@ -67,6 +67,7 @@ G4ThreadLocal G4OpBoundaryProcess* PhysicsList::fBoundaryProcess = 0;
  * @brief Constructor of Physics list
  * 
  * @param inPhysList	Name of Hadronic physics list
+ * @param fCut			Select of deexcitation settings
  * 
  **/
 
@@ -200,18 +201,7 @@ void PhysicsList::ConstructProcess()
 
     G4LossTableManager::Instance()->SetAtomDeexcitation(de);
     G4ProductionCutsTable::GetProductionCutsTable()->SetEnergyRange(lowEnergyEnd, 1*GeV);
-/*
-    G4EmProcessOptions emOptions;
-
-    emOptions.SetMinEnergy(100*eV);
-    emOptions.SetMaxEnergy(100*TeV);
-    emOptions.SetDEDXBinning(12*10);
-    emOptions.SetLambdaBinning(12*10);
-
-
-    emOptions.SetMscStepLimitation(fUseSafety);
-    emOptions.SetStepFunction(0.2, 100*um);
-  */  
+  
     SetCuts();
     AddStepMax();
     
@@ -411,7 +401,6 @@ void PhysicsList::ConstructOp()
   fMieHGScatteringProcess->SetVerboseLevel(fVerboseLevel);
   fBoundaryProcess->SetVerboseLevel(fVerboseLevel);
 
-  // Use Birks Correction in the Scintillation process
   if(G4Threading::IsMasterThread())
   {
     G4EmSaturation* emSaturation =
@@ -502,10 +491,12 @@ void PhysicsList::SetCuts()
 
   if (verboseLevel>0) { DumpCutValuesTable(); }
 }
-///StepMax
+
+/// @brief Setting step limitation
+
 void PhysicsList::AddStepMax()
 {
-  // Step limitation seen as a process
+
   StepMax* stepMaxProcess = new StepMax();
 
   auto particleIterator=GetParticleIterator();

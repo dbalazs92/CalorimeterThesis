@@ -1,11 +1,11 @@
 /**
- * @file /EMCal_MT/include/ActionInitialization.hh
+ * @file /ECal_MT/include/ActionInitialization.hh
  * @author Balázs Demeter <balazsdemeter92@gmail.com>
  * @date 2017/09/15 <creation>
  * 
  * @section DESCRIPTION
  * 
- * The Geant4 simulation of EMcal's action initialization class. 
+ * The Geant4 simulation of ECal's action initialization class. 
  * Latest updates of project can be found in README file.
  **/
 

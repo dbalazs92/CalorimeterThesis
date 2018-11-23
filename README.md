@@ -60,21 +60,23 @@ After giving the necessary permissions for setup script, run:
  
 #### Run in batch mode
 
-After build, in the directory of build (emcal_build), open a terminal window and enter:
+After build, in the directory of build (ecal_build), open a terminal window and enter:
 
 ```
-./EMCal_MT <numberofevents> <energyofparticleingev> <physicslist> <typeofparticle> <fiberparameter> <typeofcut> <noofthreads>
+./ECal_MT <numberofevents> <energyofparticleingev> <physicslist> <typeofparticle> <fiberparameter> <typeofcut> <noofthreads>
 ```
 
 #### Run in interactive mode
 
-After build, in the directory of program (EMCal_MT), open a terminal window and enter:
+After build, in the directory of program (ECal_MT), open a terminal window and enter:
 
 ```
 ./interactive.sh
 ```
 
 ## Updates
+
+* 2018/11/23 - 'v3.0' - Release Candidate version 
 
 * 2018/11/17 - 'v2.5' - Major upgrade of every parts 
 

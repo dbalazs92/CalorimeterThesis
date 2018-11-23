@@ -1,11 +1,11 @@
 /**
- * @file /EMCal_MT/src/DetectorConstruction.cc
+ * @file /ECal_MT/src/DetectorConstruction.cc
  * @author Balázs Demeter <balazsdemeter92@gmail.com>
  * @date 2017/09/15 <creation>
  * 
  * @section DESCRIPTION
  * 
- * The Geant4 simulation of EMcal's Detector construction source code to define materials and geometry. 
+ * The Geant4 simulation of ECal's Detector construction source code to define materials and geometry. 
  * Latest updates of project can be found in README file.
  **/
 
@@ -18,7 +18,12 @@
 #include "G4OpticalSurface.hh"
 
 
-/// @brief Constructor of Detector construction
+/** @brief Constructor of Detector construction
+ * 
+ *  @param fCalSim	Option to select between authentication and calorimeter layouts
+ *  @param fiber 	Fiber number parameter
+ * 
+ **/
 
 DetectorConstruction::DetectorConstruction(G4int fiber)
 : G4VUserDetectorConstruction(), fFiber(fiber), fCalSim(true)
@@ -41,7 +46,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   G4double a, z, density_pmma, density_ps, pos=18, r = (0.47/2)*mm; /// Useable constants and variables (radius, density and etc.)
   G4int nelements;
 
-  G4double tank_sizeXY = 1.0*mm, tank_sizeZ = 12.6*cm; /// Size of Tank, before: 0.87
+  G4double tank_sizeXY = 1.0*mm, tank_sizeZ = 6.3*cm; /// Size of Tank, before: 0.87
 
   G4NistManager* nist = G4NistManager::Instance(); /// Get nist material manager
 
@@ -90,7 +95,6 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     G4ThreeVector posTank = G4ThreeVector(0, 0*cm, pos*cm);
 
     G4Box* solidTank = new G4Box("Tank", (fFiber)*(tank_sizeXY/2), (fFiber)*(tank_sizeXY/2), tank_sizeZ);
-    //G4Tubs* solidTank = new G4Tubs("Tank", 0*cm, 18*cm, tank_sizeZ, 0*deg, 360*deg);
 
     G4Material* tank_mat = nist->FindOrBuildMaterial("G4_W");
 
@@ -181,7 +185,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
   
   G4double detec_sizeZ = 1*mm;
   G4Box* solidDetec = new G4Box("Detector", (fFiber)*(tank_sizeXY/2), (fFiber)*(tank_sizeXY/2), detec_sizeZ);
-  G4ThreeVector posDetec =G4ThreeVector(0, 0*cm, ((pos*cm)+(tank_sizeZ)+(detec_sizeZ))); ///zpos+(fTank_z)+(mirror_z)
+  G4ThreeVector posDetec =G4ThreeVector(0, 0*cm, ((pos*cm)+(tank_sizeZ)+(detec_sizeZ)));
 
   G4Material* detec_mat = nist->FindOrBuildMaterial("G4_Pyrex_Glass");
 
@@ -193,7 +197,22 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
   G4VPhysicalVolume* Detector_phys = new G4PVPlacement(0,posDetec, logicDetec, "Detector", logicWorld, false, 0, checkOverlaps);
   
-  /// optical database
+/**
+  * ... Optical database ...
+  *
+  * @param photonEnergy		Possible discrete optical photon energies
+  * @param rIps				Refractive index of Polystrene
+  * @param absPS			Absorption length of Polystrene
+  * @param scFastPS			Scintillation constants of Polystrene (Fast process)
+  * @param mptPS 			Material properties table of Polystrene
+  * @param rIpmma			Refractive index of Poly(methyl methacrylate)
+  * @param absPMMA			Absorption length of Poly(methyl methacrylate)
+  * @param mptPMMA 			Material properties table of Poly(methyl methacrylate)
+  * @param rIMirror			Refractive index of PhotoDetector
+  * @param absMirror		Absorption length of PhotoDetector
+  * @param mptMirror 		Material properties table of PhotoDetector
+  *
+  **/
   
   G4double photonEnergy[] = { 2.00*eV, 2.44*eV, 2.88*eV, 3.31*eV, 3.75*eV, 4.19*eV, 4.63*eV, 5.06*eV };
 
@@ -227,17 +246,17 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
   pmma->SetMaterialPropertiesTable(mptPMMA);
   
-  G4double rImirror[] = { 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00};
+  G4double rIMirror[] = { 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00};
   G4double refMirror[] = {0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00};
 
-  G4MaterialPropertiesTable* mptmirror = new G4MaterialPropertiesTable();
-  mptmirror->AddProperty("RINDEX", photonEnergy, rImirror, nEntries);
-  mptmirror->AddProperty("REFLECTIVITY", photonEnergy, refMirror, nEntries);
+  G4MaterialPropertiesTable* mptMirror = new G4MaterialPropertiesTable();
+  mptMirror->AddProperty("RINDEX", photonEnergy, rIMirror, nEntries);
+  mptMirror->AddProperty("REFLECTIVITY", photonEnergy, refMirror, nEntries);
 
-  G4cout << "mirror G4MaterialPropertiesTable" << G4endl;
-  mptmirror->DumpTable();
+  G4cout << "Mirror G4MaterialPropertiesTable" << G4endl;
+  mptMirror->DumpTable();
 
-  detec_mat->SetMaterialPropertiesTable(mptmirror);
+  detec_mat->SetMaterialPropertiesTable(mptMirror);
   
   ///Surfaces
   

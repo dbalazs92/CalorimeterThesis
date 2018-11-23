@@ -1,11 +1,11 @@
 /**
- * @file /EMCal_MT/include/SteppingAction.hh
+ * @file /ECal_MT/include/SteppingAction.hh
  * @author Balázs Demeter <balazsdemeter92@gmail.com>
  * @date 2017/09/15 <creation>
  * 
  * @section DESCRIPTION
  * 
- * The Geant4 simulation of EMcal's Stepping action class for steps of simulation.
+ * The Geant4 simulation of ECal's Stepping action class for steps of simulation.
  * Latest updates of project can be found in README file.
  **/
 

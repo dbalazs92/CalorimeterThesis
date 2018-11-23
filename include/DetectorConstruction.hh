@@ -1,11 +1,11 @@
 /**
- * @file /EMCal_MT/include/DetectorConstruction.hh
+ * @file /ECal_MT/include/DetectorConstruction.hh
  * @author Balázs Demeter <balazsdemeter92@gmail.com>
  * @date 2017/09/15 <creation>
  * 
  * @section DESCRIPTION
  * 
- * The Geant4 simulation of EMcal's Detector construction class to define materials and geometry. 
+ * The Geant4 simulation of ECal's Detector construction class to define materials and geometry. 
  * Latest updates of project can be found in README file.
  **/
  

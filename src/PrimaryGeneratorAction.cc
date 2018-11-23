@@ -1,11 +1,11 @@
 /**
- * @file /EMCal_MT/src/PrimaryGeneratorAction.cc
+ * @file /ECal_MT/src/PrimaryGeneratorAction.cc
  * @author Balázs Demeter <balazsdemeter92@gmail.com>
  * @date 2017/09/15 <creation>
  * 
  * @section DESCRIPTION
  * 
- * The Geant4 simulation of EMcal's primary generator source code to define particle, energy, momentum, position.
+ * The Geant4 simulation of ECal's primary generator source code to define particle, energy, momentum, position.
  * Latest updates of project can be found in README file.
  **/
 
@@ -24,8 +24,10 @@
 
 /** @brief Constructor of Primary generator action
  *
- *  @param E0 		Kinetic energy of particle
- *  @param Particle Type of particle
+ *  @param E0 			Kinetic energy of particle
+ *  @param Particle 	Type of particle
+ *  @param Fiber		Fiber number parameter
+ *  @param fBoxMuller	Option to Box-Muller algorithm for inhomogeneous particle shower
  * 
  **/
 

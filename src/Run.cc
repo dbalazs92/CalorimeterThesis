@@ -1,11 +1,11 @@
 /**
- * @file /EMCal_MT/src/Run.cc
+ * @file /ECal_MT/src/Run.cc
  * @author Balázs Demeter <balazsdemeter92@gmail.com>
  * @date 2017/09/15 <creation>
  * 
  * @section DESCRIPTION
  * 
- * The Geant4 simulation of EMcal's run source code for threads.
+ * The Geant4 simulation of ECal's run source code for threads.
  * Latest updates of project can be found in README file.
  **/
 

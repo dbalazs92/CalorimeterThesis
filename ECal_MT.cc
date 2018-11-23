@@ -32,11 +32,11 @@
 /**
  * @brief Start of main function
  * 
- * @param	argc		Number of command line arguments
  * @param	NoE 		Command line argument for Number of events 
  * @param	Energy 		Command line argument for Kinetic energy of particle
  * @param	PhysList 	Command line argument for Hadronic physics list
  * @param	Particle	Command line argument for type of Particle
+ * @param	fiber		Command line argument for number of fibers in ECal
  * @param   CutEx       Command line argument for cut of deexcitation
  * @param   RootFile    Command line argument for name of ROOT file for results
  * 
@@ -45,7 +45,7 @@
 int main(int argc,char** argv)
 {
   
-  /// parameter from command line
+  /// default values of parameters from command line
   unsigned int NoE=0;
   unsigned int CutEx=0;
   unsigned int nThreads = 1;

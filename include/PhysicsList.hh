@@ -1,11 +1,11 @@
 /**
- * @file /EMCal_MT/include/PhysicsList.hh
+ * @file /ECal_MT/include/PhysicsList.hh
  * @author Balázs Demeter <balazsdemeter92@gmail.com>
  * @date 2017/09/15 <creation>
  * 
  * @section DESCRIPTION
  * 
- * The Geant4 simulation of EMcal's physics list class for definition of physics.
+ * The Geant4 simulation of ECal's physics list class for definition of physics.
  * Latest updates of project can be found in README file.
  **/
 

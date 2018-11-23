@@ -1,83 +1,59 @@
-//
-// ********************************************************************
-// * License and Disclaimer                                           *
-// *                                                                  *
-// * The  Geant4 software  is  copyright of the Copyright Holders  of *
-// * the Geant4 Collaboration.  It is provided  under  the terms  and *
-// * conditions of the Geant4 Software License,  included in the file *
-// * LICENSE and available at  http://cern.ch/geant4/license .  These *
-// * include a list of copyright holders.                             *
-// *                                                                  *
-// * Neither the authors of this software system, nor their employing *
-// * institutes,nor the agencies providing financial support for this *
-// * work  make  any representation or  warranty, express or implied, *
-// * regarding  this  software system or assume any liability for its *
-// * use.  Please see the license in the file  LICENSE  and URL above *
-// * for the full disclaimer and the limitation of liability.         *
-// *                                                                  *
-// * This  code  implementation is the result of  the  scientific and *
-// * technical work of the GEANT4 collaboration.                      *
-// * By using,  copying,  modifying or  distributing the software (or *
-// * any work based  on the software)  you  agree  to acknowledge its *
-// * use  in  resulting  scientific  publications,  and indicate your *
-// * acceptance of all terms of the Geant4 Software license.          *
-// ********************************************************************
-//
-/// \file electromagnetic/TestEm2/src/StepMax.cc
-/// \brief Implementation of the StepMax class
-//
-// $Id: StepMax.cc 98761 2016-08-09 14:07:11Z gcosmo $
-//
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+/**
+ * @file /ECal_MT/include/StepMax.cc
+ * @author Balázs Demeter <balazsdemeter92@gmail.com>
+ * @date 2017/09/15 <creation>
+ * 
+ * @section DESCRIPTION
+ * 
+ * The Geant4 simulation of ECal's StepMax source code for steps limitation.
+ * Latest updates of project can be found in README file.
+ **/
 
 #include "StepMax.hh"
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+/// Constructor of Stepmax
 
 StepMax::StepMax(const G4String& processName)
  : G4VDiscreteProcess(processName),fMaxChargedStep(DBL_MAX)
 {
 }
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+/// Destructor of Stepmax
 
 StepMax::~StepMax() { }
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+/// Checking if particle is applicable or not by PDG charge
 
 G4bool StepMax::IsApplicable(const G4ParticleDefinition& particle)
 {
   return (particle.GetPDGCharge() != 0. && !particle.IsShortLived());
 }
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+/// Setting Maximum of steps
 
 void StepMax::SetMaxStep(G4double step) 
 {
   fMaxChargedStep = step;
 }
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+/// Get Physical Interaction Length from post step
 
 G4double StepMax::PostStepGetPhysicalInteractionLength( const G4Track&,
                                                    G4double,
                                                    G4ForceCondition* condition )
 {
-  // condition is set to "Not Forced"
-  *condition = NotForced;
+  *condition = NotForced; /// condition is set to "Not Forced"
 
   return fMaxChargedStep;
 }
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+/// Initializing particle change by post step
 
 G4VParticleChange* StepMax::PostStepDoIt(const G4Track& aTrack, const G4Step&)
 {
-   // do nothing
-   aParticleChange.Initialize(aTrack);
+   aParticleChange.Initialize(aTrack); /// do nothing
    return &aParticleChange;
 }
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+/// End of file
 

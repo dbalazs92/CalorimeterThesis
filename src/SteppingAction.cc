@@ -1,11 +1,11 @@
 /**
- * @file /EMCal_MT/src/SteppingAction.cc
+ * @file /ECal_MT/src/SteppingAction.cc
  * @author Balázs Demeter <balazsdemeter92@gmail.com>
  * @date 2017/09/15 <creation>
  * 
  * @section DESCRIPTION
  * 
- * The Geant4 simulation of EMcal's Stepping action source code for steps of simulation.
+ * The Geant4 simulation of ECal's Stepping action source code for steps of simulation.
  * Latest updates of project can be found in README file.
  **/
 
@@ -37,7 +37,6 @@ void SteppingAction::UserSteppingAction(const G4Step* fStep)
   const G4Event* evt = G4RunManager::GetRunManager()->GetCurrentEvent();
   if(evt) eID = evt->GetEventID();
 
-  //G4double preTime = fStep->GetPreStepPoint()->GetLocalTime();
   G4double postTime = fStep->GetPostStepPoint()->GetLocalTime();
 
   if(fTrack->GetTrackStatus()!=fAlive) { return; } /// check if it is alive
@@ -58,12 +57,6 @@ void SteppingAction::UserSteppingAction(const G4Step* fStep)
   G4double postY = fStep->GetPostStepPoint()->GetPosition().y();
   G4double postZ = fStep->GetPostStepPoint()->GetPosition().z();
   G4double postkinE  = fStep->GetPostStepPoint()->GetKineticEnergy();
-
-  ///G4int copynum = fStep->GetPostStepPoint()->GetTouchableHandle()->GetCopyNumber();
-  ///G4int copynumpre = fStep->GetPreStepPoint()->GetTouchableHandle()->GetCopyNumber();
-
-  ///G4ThreeVector momentumdirection = fTrack->GetMomentumDirection();
-  ///G4double theta = momentumdirection.theta();
 
   G4String particleName = particle->GetParticleName();
   G4String preName=prevolume->GetName();

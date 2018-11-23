@@ -1,11 +1,11 @@
 /**
- * @file /EMCal_MT/include/Run.hh
+ * @file /ECal_MT/include/Run.hh
  * @author Balázs Demeter <balazsdemeter92@gmail.com>
  * @date 2017/09/15 <creation>
  * 
  * @section DESCRIPTION
  * 
- * The Geant4 simulation of EMcal's run class for threads.
+ * The Geant4 simulation of ECal's run class for threads.
  * Latest updates of project can be found in README file.
  **/
  

@@ -1,11 +1,11 @@
 /**
- * @file /EMCal_MT/src/ActionInitialization.cc
+ * @file /ECal_MT/src/ActionInitialization.cc
  * @author Balázs Demeter <balazsdemeter92@gmail.com>
  * @date 2017/09/15 <creation>
  * 
  * @section DESCRIPTION
  * 
- * The Geant4 simulation of EMcal's action initialization source code. 
+ * The Geant4 simulation of ECal's action initialization source code. 
  * Latest updates of project can be found in README file.
  **/
 
@@ -16,6 +16,7 @@
  *
  *  @param e0 		Kinetic energy of particle
  *  @param Particle Type of particle
+ *  @param Fiber 	ECal fiber number parameter
  * 
  **/
 

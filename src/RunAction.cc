@@ -1,11 +1,11 @@
 /**
- * @file /EMCal_MT/src/RunAction.cc
+ * @file /ECal_MT/src/RunAction.cc
  * @author Balázs Demeter <balazsdemeter92@gmail.com>
  * @date 2017/09/15 <creation>
  * 
  * @section DESCRIPTION
  * 
- * The Geant4 simulation of EMcal's run action source code for RunAction global.
+ * The Geant4 simulation of ECal's run action source code for RunAction global.
  * Latest updates of project can be found in README file.
  **/
 
