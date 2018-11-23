@@ -1,6 +1,6 @@
 # CalorimeterThesis
 
-GEANT simulation of sPHENIX's Electromagnetic calorimeter. C++ program of my Master thesis work.
+Geant4 simulation of sPHENIX's Electromagnetic calorimeter. C++ program of my Master thesis work.
 
 ## Author
 
