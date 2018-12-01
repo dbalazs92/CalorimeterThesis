@@ -1,6 +1,6 @@
 # CalorimeterThesis
 
-Geant4 simulation of sPHENIX's Electromagnetic calorimeter. C++ program of my Master thesis work.
+GEANT simulation of sPHENIX's Electromagnetic calorimeter. C++ program of my Master thesis work.
 
 ## Author
 
@@ -13,7 +13,7 @@ sPHENIX is a new detector planned for the Relativistic Heavy Ion Collider at Bro
 The calorimeter will be divided into individual towers with about ~2500 fibers. 
 A calorimeter 18 radiation lengths thick occupies 12.6 cm in radius, and with light collection, sensors, preamps, and cables, the calorimeter is expected to occupy radial space of about 25 cm. 
 The fibers are single-cladded Kuraray SCSF-78 with 0.47 mm diameter fibers on 1 mm centers. 
-For starting program in batch mode (no UI), 4 parameters are needed: Number of events, energy of bullet particle (in GeV), Hadronic physics list and type of particles. 
+For starting program in batch mode (no UI), 5 parameters are needed: Number of events, energy of bullet particle (in GeV), Hadronic or non-hadronic physics list, type of particles, fiber parameter (number of fibers in one line), type of cut and number of threads for simulation.
 The first two parameters and the last are numbers while others are strings for the program. MultiThreading is enabled.
 
 ## Download and build
@@ -75,6 +75,8 @@ After build, in the directory of program (ECal_MT), open a terminal window and e
 ```
 
 ## Updates
+
+* 2018/12/01 - 'v4.0' - Release
 
 * 2018/11/23 - 'v3.0' - Release Candidate version 
 
